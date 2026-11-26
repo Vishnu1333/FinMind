@@ -60,7 +60,7 @@ class GeminiProvider(AIProvider):
         )
         if not self.api_key:
             raise AIConfigurationError(
-                "Configure GEMINI_API_KEY or both NEON_AI_GATEWAY_BASE_URL and NEON_AI_GATEWAY_TOKEN."
+                "GEMINI_API_KEY is not configured; configure it or both NEON_AI_GATEWAY_BASE_URL and NEON_AI_GATEWAY_TOKEN."
             )
 
         gateway_model = os.getenv("NEON_AI_GATEWAY_MODEL", "gemini-3-flash")
