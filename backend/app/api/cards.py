@@ -14,7 +14,7 @@ class CardResponse(pydantic.BaseModel):
     status: str
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 @router.get("", response_model=List[CardResponse])
 @router.get("/", response_model=List[CardResponse], include_in_schema=False)
