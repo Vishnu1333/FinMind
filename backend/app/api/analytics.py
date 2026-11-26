@@ -21,7 +21,7 @@ class AccountBalance(BaseModel):
     balance: Decimal
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class SummaryResponse(BaseModel):
     currency: str = CURRENCY
