@@ -20,8 +20,7 @@ class TransactionResponse(BaseModel):
     category_id: Optional[int]
     category_name: Optional[str]
 
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
 
 
 def _to_response(t: models.Transaction) -> TransactionResponse:
