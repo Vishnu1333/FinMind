@@ -66,28 +66,5 @@ def get_db():
 # Import ORM models to ensure metadata is populated
 from backend.app.models import business_models, document_models
 
-# Ensure pgvector extension is available in PostgreSQL (optional)
-if engine.dialect.name == "postgresql":
-    try:
-        from sqlalchemy import text
-        with engine.begin() as conn:
-            conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
-    except Exception:
-        # Ignore if extension creation fails (e.g., insufficient privileges)
-        pass
-
-# Create tables if they do not exist
-Base.metadata.create_all(engine)
-
-# Idempotent schema sync for columns added after initial deployment.
-# PostgreSQL supports ADD COLUMN IF NOT EXISTS, making this safe on every boot.
-if engine.dialect.name == "postgresql":
-    try:
-        from sqlalchemy import text
-        with engine.begin() as conn:
-            conn.execute(text("ALTER TABLE transactions ADD COLUMN IF NOT EXISTS merchant VARCHAR"))
-            conn.execute(text("ALTER TABLE documents ADD COLUMN IF NOT EXISTS failure_reason VARCHAR"))
-    except Exception:
-        # Never block startup because of a schema sync issue; the column
-        # is nullable and only used for optional merchant analytics.
-        pass
+# Database schema changes are managed by Alembic migrations. Do not run DDL
+# at import time: this module is also imported by Alembic to load metadata.
