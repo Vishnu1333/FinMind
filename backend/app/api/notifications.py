@@ -16,7 +16,7 @@ class NotificationResponse(pydantic.BaseModel):
     severity: str
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 @router.get("", response_model=List[NotificationResponse])
 @router.get("/", response_model=List[NotificationResponse], include_in_schema=False)
