@@ -21,7 +21,7 @@ class StepResult(pydantic.BaseModel):
     extra: dict = {}
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class PendingAction(pydantic.BaseModel):
