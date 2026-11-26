@@ -18,8 +18,7 @@ class SettingsResponse(pydantic.BaseModel):
     security_data: Optional[Dict[str, Any]] = None
     notifications_data: Optional[Dict[str, Any]] = None
 
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
 
 @router.get("", response_model=SettingsResponse)
 @router.get("/", response_model=SettingsResponse, include_in_schema=False)
