@@ -1,0 +1,73 @@
+{
+  "analyzed_at": "2026-10-04T12:09:15.661873+00:00",
+  "class_balance": {
+    "counts": {
+      "0": 700,
+      "1": 300
+    },
+    "positive_rate": 0.3,
+    "target": "target"
+  },
+  "column_dtypes": {
+    "age": "int64",
+    "chk_acct": "object",
+    "credit_amount": "int64",
+    "credit_history": "object",
+    "duration_months": "int64",
+    "foreign_worker": "object",
+    "housing": "object",
+    "installment_rate": "int64",
+    "job": "object",
+    "n_credits": "int64",
+    "n_people": "int64",
+    "other_debtors": "object",
+    "other_installments": "object",
+    "personal_status": "object",
+    "present_employment": "object",
+    "present_residence": "int64",
+    "property": "object",
+    "purpose": "object",
+    "savings_acct": "object",
+    "target": "int8",
+    "telephone": "object"
+  },
+  "columns": 21,
+  "dataset": "german_credit",
+  "exact_duplicate_rows": 0,
+  "missing": {},
+  "missing_total_cells": 0,
+  "outliers_iqr": {
+    "age": {
+      "count": 23,
+      "iqr_lower": 4.5,
+      "iqr_upper": 64.5
+    },
+    "credit_amount": {
+      "count": 72,
+      "iqr_lower": -2544.625,
+      "iqr_upper": 7882.375
+    },
+    "duration_months": {
+      "count": 70,
+      "iqr_lower": -6.0,
+      "iqr_upper": 42.0
+    },
+    "n_credits": {
+      "count": 6,
+      "iqr_lower": -0.5,
+      "iqr_upper": 3.5
+    },
+    "n_people": {
+      "count": 155,
+      "iqr_lower": 1.0,
+      "iqr_upper": 1.0
+    }
+  },
+  "rows": 1000,
+  "transformation_decisions": {
+    "categorical_encoding": "integer-encoded categories: ['chk_acct', 'credit_history', 'purpose', 'savings_acct', 'present_employment', 'personal_status', 'other_debtors', 'property', 'other_installments', 'housing', 'job', 'telephone', 'foreign_worker']",
+    "rows_raw": 1000,
+    "split_rule": "no timestamps -> stratified random split",
+    "target_mapping": "1 = good credit -> 0, 2 = bad credit -> 1 (bad credit is the positive class)"
+  }
+}

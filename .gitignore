@@ -1,17 +1,37 @@
 .env
+# Large derived ML data — regenerate with ./backend/venv/bin/python -m ml.training.datasets
+data/processed/
+data/raw/online_retail/
+data/raw/superstore/
+data/raw/german_credit/
+.DS_Store
+**/.DS_Store
+backend/venv/
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Secrets
+.env
 .env.*
 !.env.example
 
-data/raw/
-data/processed/
-
-.pytest_cache/
+# Python generated files
 __pycache__/
-*.pyc
-.DS_Store
+*.py[cod]
+.pytest_cache/
+venv/
+.venv/
 
+# Frontend dependencies and builds
 node_modules/
 .next/
 .vercel/
-.venv/
-venv/
+
+# Datasets
+data/raw/
+data/processed/
+
+# macOS
+.DS_Store

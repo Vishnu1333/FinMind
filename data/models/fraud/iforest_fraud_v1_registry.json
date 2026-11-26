@@ -1,0 +1,14 @@
+{
+    "model_name": "iforest_fraud_v1",
+    "version": "1.0",
+    "dataset": "mlg-ulb/creditcardfraud",
+    "training_timestamp": "2026-09-23T06:36:31.212825",
+    "metrics": {
+        "precision": 0.1134020618556701,
+        "recall": 0.12087912087912088,
+        "f1": 0.11702127659574468
+    },
+    "artifact_path": "data/models/fraud/iforest_fraud_v1.pkl",
+    "artifact_checksum": "93a8c9fc2d3ff85e9028e1e39ab962cd",
+    "status": "verified"
+}

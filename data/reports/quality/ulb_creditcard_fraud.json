@@ -1,0 +1,215 @@
+{
+  "analyzed_at": "2026-10-04T16:54:26.604713+00:00",
+  "class_balance": {
+    "counts": {
+      "0": 284315,
+      "1": 492
+    },
+    "positive_rate": 0.001727,
+    "target": "Class"
+  },
+  "column_dtypes": {
+    "Amount": "float64",
+    "Class": "int64",
+    "Time": "float64",
+    "V1": "float64",
+    "V10": "float64",
+    "V11": "float64",
+    "V12": "float64",
+    "V13": "float64",
+    "V14": "float64",
+    "V15": "float64",
+    "V16": "float64",
+    "V17": "float64",
+    "V18": "float64",
+    "V19": "float64",
+    "V2": "float64",
+    "V20": "float64",
+    "V21": "float64",
+    "V22": "float64",
+    "V23": "float64",
+    "V24": "float64",
+    "V25": "float64",
+    "V26": "float64",
+    "V27": "float64",
+    "V28": "float64",
+    "V3": "float64",
+    "V4": "float64",
+    "V5": "float64",
+    "V6": "float64",
+    "V7": "float64",
+    "V8": "float64",
+    "V9": "float64"
+  },
+  "columns": 31,
+  "dataset": "ulb_creditcard_fraud",
+  "exact_duplicate_rows": 1081,
+  "missing": {},
+  "missing_total_cells": 0,
+  "outliers_iqr": {
+    "Amount": {
+      "count": 31904,
+      "iqr_lower": -101.7475,
+      "iqr_upper": 184.5125
+    },
+    "Class": {
+      "count": 492,
+      "iqr_lower": 0.0,
+      "iqr_upper": 0.0
+    },
+    "V1": {
+      "count": 7062,
+      "iqr_lower": -4.274396001792603,
+      "iqr_upper": 4.669664311280146
+    },
+    "V10": {
+      "count": 9496,
+      "iqr_lower": -2.0194494839425694,
+      "iqr_upper": 1.9379472025887527
+    },
+    "V11": {
+      "count": 780,
+      "iqr_lower": -3.015625599764853,
+      "iqr_upper": 2.9927248115734812
+    },
+    "V12": {
+      "count": 15348,
+      "iqr_lower": -1.941285763020238,
+      "iqr_upper": 2.1539523105259604
+    },
+    "V13": {
+      "count": 3368,
+      "iqr_lower": -2.6151056869463822,
+      "iqr_upper": 2.629071347271788
+    },
+    "V14": {
+      "count": 14149,
+      "iqr_lower": -1.803659804964707,
+      "iqr_upper": 1.8712356417278626
+    },
+    "V15": {
+      "count": 2894,
+      "iqr_lower": -2.430441907369377,
+      "iqr_upper": 2.496378434529079
+    },
+    "V16": {
+      "count": 8184,
+      "iqr_lower": -1.955036385495261,
+      "iqr_upper": 2.010295931257707
+    },
+    "V17": {
+      "count": 7420,
+      "iqr_lower": -1.8088832582431966,
+      "iqr_upper": 1.7248099271865331
+    },
+    "V18": {
+      "count": 7533,
+      "iqr_lower": -1.9983346169934264,
+      "iqr_upper": 2.0002915652156013
+    },
+    "V19": {
+      "count": 10205,
+      "iqr_lower": -1.8291713305051371,
+      "iqr_upper": 1.8318217675233686
+    },
+    "V2": {
+      "count": 13526,
+      "iqr_lower": -2.7019605905224315,
+      "iqr_upper": 2.90713454829761
+    },
+    "V20": {
+      "count": 27770,
+      "iqr_lower": -0.7288646731770594,
+      "iqr_upper": 0.6501841494971068
+    },
+    "V21": {
+      "count": 14497,
+      "iqr_lower": -0.8505531720141558,
+      "iqr_upper": 0.8085354286142143
+    },
+    "V22": {
+      "count": 1317,
+      "iqr_lower": -2.148706384652634,
+      "iqr_upper": 2.1349096473259586
+    },
+    "V23": {
+      "count": 18541,
+      "iqr_lower": -0.6260789583212862,
+      "iqr_upper": 0.6118746771624517
+    },
+    "V24": {
+      "count": 4774,
+      "iqr_lower": -1.5457552412760254,
+      "iqr_upper": 1.630695705034713
+    },
+    "V25": {
+      "count": 5367,
+      "iqr_lower": -1.318935979464254,
+      "iqr_upper": 1.3525064882663698
+    },
+    "V26": {
+      "count": 5596,
+      "iqr_lower": -1.178888075273932,
+      "iqr_upper": 1.092856323107968
+    },
+    "V27": {
+      "count": 39163,
+      "iqr_lower": -0.3136665027898834,
+      "iqr_upper": 0.333872093171221
+    },
+    "V28": {
+      "count": 30342,
+      "iqr_lower": -0.24981941467918245,
+      "iqr_upper": 0.27513957642002174
+    },
+    "V3": {
+      "count": 3363,
+      "iqr_lower": -3.7667054090861836,
+      "iqr_upper": 3.9035361133965982
+    },
+    "V4": {
+      "count": 11148,
+      "iqr_lower": -3.236612225031064,
+      "iqr_upper": 3.1313133981683787
+    },
+    "V5": {
+      "count": 12295,
+      "iqr_lower": -2.646882336821933,
+      "iqr_upper": 2.5672117056694685
+    },
+    "V6": {
+      "count": 22965,
+      "iqr_lower": -2.51858636568538,
+      "iqr_upper": 2.148855653580996
+    },
+    "V7": {
+      "count": 8948,
+      "iqr_lower": -2.240843806907704,
+      "iqr_upper": 2.2572040007487804
+    },
+    "V8": {
+      "count": 24134,
+      "iqr_lower": -1.0125931529838397,
+      "iqr_upper": 1.1313092708678223
+    },
+    "V9": {
+      "count": 8283,
+      "iqr_lower": -2.503452471089882,
+      "iqr_upper": 2.457493931105559
+    }
+  },
+  "rows": 284807,
+  "time_index": {
+    "column": "Time",
+    "max": 172792.0,
+    "min": 0.0,
+    "semantics": "seconds elapsed since the first transaction in the dataset (2 days of activity)"
+  },
+  "transformation_decisions": {
+    "chronological_split_rule": "split on Time (seconds since first tx): train < val < test, no shuffle",
+    "duplicate_policy": "duplicates are real repeated transaction records; kept, but the chronological split is audited so identical rows never straddle the train/test boundary",
+    "exact_duplicate_rows_in_raw": 1081,
+    "pca_features_note": "V1..V28 are PCA components provided by the dataset (Worldline/ULB)",
+    "rows_raw": 284807
+  }
+}

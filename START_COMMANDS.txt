@@ -1,0 +1,51 @@
+================================================================================
+FINMIND - TERMINAL START COMMANDS
+================================================================================
+
+PREREQUISITE:
+Make sure PostgreSQL is running on your Mac.
+If PostgreSQL is stopped, start it via Homebrew:
+  brew services start postgresql@14
+  (or: brew services start postgresql)
+
+--------------------------------------------------------------------------------
+TERMINAL 1: START BACKEND (FastAPI - Port 8000)
+--------------------------------------------------------------------------------
+Open a terminal tab and run:
+
+cd /Users/vishnuvardhan/Downloads/FinMind
+source backend/venv/bin/activate
+uvicorn backend.app.main:app --reload --host 0.0.0.0 --port 8000
+
+(Alternatively, in a single command without activating manually:
+cd /Users/vishnuvardhan/Downloads/FinMind && backend/venv/bin/uvicorn backend.app.main:app --reload --host 0.0.0.0 --port 8000
+)
+
+--------------------------------------------------------------------------------
+TERMINAL 2: START FRONTEND (Next.js - Port 3000)
+--------------------------------------------------------------------------------
+Open a second terminal tab and run:
+
+cd /Users/vishnuvardhan/Downloads/FinMind/frontend
+npm run dev
+
+--------------------------------------------------------------------------------
+ACCESS THE APPLICATION
+--------------------------------------------------------------------------------
+- Web Application:       http://localhost:3000
+- Register Page:         http://localhost:3000/register
+- Login Page:            http://localhost:3000/login
+- Backend API Docs:      http://localhost:8000/docs
+- Backend Health Check:  http://localhost:8000/health
+
+--------------------------------------------------------------------------------
+OPTIONAL: RUNNING TESTS
+--------------------------------------------------------------------------------
+Backend Test Suite (from root):
+cd /Users/vishnuvardhan/Downloads/FinMind
+backend/venv/bin/pytest backend/tests/ -v
+
+Frontend Build / Type-Check:
+cd /Users/vishnuvardhan/Downloads/FinMind/frontend
+npm run build
+================================================================================

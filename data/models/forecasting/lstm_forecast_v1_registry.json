@@ -1,0 +1,15 @@
+{
+    "model_name": "lstm_forecast_v1",
+    "version": "2.0",
+    "dataset": "uciml/default-of-credit-card",
+    "training_timestamp": "2026-09-25T04:29:09.813001",
+    "architecture": "LSTM (NumPy, BPTT), hidden=16, seq_len=14",
+    "metrics": {
+        "mae": 56503.03,
+        "rmse": 82019.68,
+        "mape": 276.69
+    },
+    "artifact_path": "data/models/forecasting/lstm_forecast_v1.pkl",
+    "artifact_checksum": "474650b3b91d8e2b2cfa12222e0cf5ca",
+    "status": "verified"
+}

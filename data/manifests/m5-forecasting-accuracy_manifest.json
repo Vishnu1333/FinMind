@@ -1,0 +1,11 @@
+{
+  "corrected_at": "2026-10-04T12:09:15.669135+00:00",
+  "downloaded_date": "2026-09-23T06:34:43.021354",
+  "license": "See Kaggle dataset description",
+  "name": "M5 Forecasting - Accuracy",
+  "path": "data/raw/m5-forecasting-accuracy",
+  "rows_on_disk": 0,
+  "source": "m5-forecasting-accuracy",
+  "status": "not_available",
+  "status_reason": "Not downloaded: Kaggle competition rules acceptance required (401 via API). Forecasting is covered by Online Retail + Superstore daily series."
+}

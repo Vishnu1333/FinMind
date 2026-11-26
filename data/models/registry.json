@@ -1,0 +1,881 @@
+{
+  "finmind_anomaly": {
+    "artifact_path": "data/models/finmind_anomaly/model.pkl",
+    "checksum": "678712226e2948d417d6f2285f7dc365fc998dd4d92c3b5465da1f4adc2f02bb",
+    "dataset": "PaySim synthetic mobile money transactions (ealaxi/paysim1)",
+    "environment": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "python": "3.9.6",
+      "scikit_learn": "1.6.1",
+      "scipy": "1.13.1",
+      "statsmodels": "0.14.6"
+    },
+    "features": [
+      "log_amount",
+      "hour_sin",
+      "hour_cos",
+      "dow_sin",
+      "dow_cos",
+      "is_weekend"
+    ],
+    "hyperparameters": {
+      "contamination": 0.0009505086067806235,
+      "n_estimators": 100,
+      "random_state": 42
+    },
+    "leakage_audit": {
+      "feature_collision_groups_spanning_multiple_splits": 120,
+      "feature_vector_collisions_total": 3506,
+      "interpretation": "row identity = full raw record (leakage if it spans splits); feature collisions = distinct transactions with identical feature vectors (informational, not leakage)",
+      "passed": true,
+      "row_identity_duplicates_total": 0,
+      "row_identity_groups_spanning_multiple_splits": 0
+    },
+    "metrics": {
+      "f1": 0.02577,
+      "n": 89466,
+      "n_positive": 1252,
+      "pr_auc": 0.074787,
+      "precision": 0.124138,
+      "recall": 0.014377,
+      "roc_auc": 0.795847
+    },
+    "model_name": "finmind_anomaly",
+    "model_type": "IsolationForest",
+    "status": "validated",
+    "target": "isFraud",
+    "task": "anomaly_detection",
+    "trained_at": "2026-10-04T17:00:23.102207+00:00",
+    "version": "1.0"
+  },
+  "finmind_ar14": {
+    "artifact_path": "data/models/finmind_ar14/model.npz",
+    "checksum": "5ab5f26e37472489e112bf06ab6cf92695faaa64b60af222a0fdb5e6c05fb9d6",
+    "dataset": "Online Retail (UCI 352) + Sample Superstore daily series, pooled",
+    "environment": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "python": "3.9.6",
+      "scikit_learn": "1.6.1",
+      "scipy": "1.13.1",
+      "statsmodels": "0.14.6"
+    },
+    "features": [
+      "daily_value_zscored"
+    ],
+    "hyperparameters": {
+      "estimator": "OLS lstsq",
+      "lags": 14,
+      "random_seed": "deterministic (closed form)"
+    },
+    "metrics": {
+      "pooled_one_step_scaled": {
+        "mae": 0.959924,
+        "mape_excluded_points": 0,
+        "mape_pct": 204.4356,
+        "n": 273,
+        "r2": 0.045988,
+        "rmse": 1.408655
+      },
+      "pooled_recursive_30d_scaled": {
+        "mae": 0.874622,
+        "mape_excluded_points": 0,
+        "mape_pct": 92.0854,
+        "n": 60,
+        "r2": 0.047902,
+        "rmse": 1.056704
+      }
+    },
+    "model_name": "finmind_ar14",
+    "model_type": "AR(14) pooled OLS",
+    "selected": false,
+    "status": "validated",
+    "target": "next_day_value",
+    "task": "forecasting",
+    "trained_at": "2026-10-04T17:49:44.887587+00:00",
+    "training_days": 1832,
+    "version": "1.0"
+  },
+  "finmind_fraud_paysim": {
+    "artifact_path": "data/models/finmind_fraud_paysim/model.pkl",
+    "checksum": "fb21c39ef963255fc54ab65a13b3cd4e20610a390931b67ad0ccf9fb54afb7d3",
+    "dataset": "PaySim synthetic mobile money transactions (ealaxi/paysim1)",
+    "environment": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "python": "3.9.6",
+      "scikit_learn": "1.6.1",
+      "scipy": "1.13.1",
+      "statsmodels": "0.14.6"
+    },
+    "features": [
+      "log_amount",
+      "type_encoded",
+      "oldbalance_org",
+      "oldbalance_dest",
+      "hour_sin",
+      "hour_cos",
+      "dow_sin",
+      "dow_cos",
+      "is_weekend"
+    ],
+    "hyperparameters": {
+      "class_weight": "balanced",
+      "learning_rate": 0.1,
+      "max_depth": 8,
+      "max_iter": 120,
+      "random_state": 42
+    },
+    "leakage_audit": {
+      "feature_collision_groups_spanning_multiple_splits": 120,
+      "feature_vector_collisions_total": 3506,
+      "interpretation": "row identity = full raw record (leakage if it spans splits); feature collisions = distinct transactions with identical feature vectors (informational, not leakage)",
+      "passed": true,
+      "row_identity_duplicates_total": 0,
+      "row_identity_groups_spanning_multiple_splits": 0
+    },
+    "metrics": {
+      "f1": 0.859046,
+      "n": 89466,
+      "n_positive": 1252,
+      "pr_auc": 0.960465,
+      "precision": 0.800138,
+      "recall": 0.927316,
+      "roc_auc": 0.998473
+    },
+    "model_name": "finmind_fraud_paysim",
+    "model_type": "HistGradientBoostingClassifier",
+    "status": "validated",
+    "target": "isFraud",
+    "task": "fraud_detection",
+    "trained_at": "2026-10-04T17:00:23.129971+00:00",
+    "version": "1.0"
+  },
+  "finmind_fraud_ulb": {
+    "artifact_path": "data/models/finmind_fraud_ulb/model.pkl",
+    "checksum": "3d6e65dd6b76f0483b95f4269c046257d3a4d23b3d12d3fb391471444bdd1952",
+    "dataset": "ULB Credit Card Fraud (mlg-ulb/creditcardfraud)",
+    "environment": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "python": "3.9.6",
+      "scikit_learn": "1.6.1",
+      "scipy": "1.13.1",
+      "statsmodels": "0.14.6"
+    },
+    "features": [
+      "Amount",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6",
+      "V7",
+      "V8",
+      "V9",
+      "V10",
+      "V11",
+      "V12",
+      "V13",
+      "V14",
+      "V15",
+      "V16",
+      "V17",
+      "V18",
+      "V19",
+      "V20",
+      "V21",
+      "V22",
+      "V23",
+      "V24",
+      "V25",
+      "V26",
+      "V27",
+      "V28"
+    ],
+    "hyperparameters": {
+      "random_state": 42,
+      "time_feature_excluded": true
+    },
+    "leakage_audit": {
+      "feature_collision_groups_spanning_multiple_splits": 1313,
+      "feature_vector_collisions_total": 14293,
+      "interpretation": "row identity = full raw record (leakage if it spans splits); feature collisions = distinct transactions with identical feature vectors (informational, not leakage)",
+      "passed": true,
+      "row_identity_duplicates_total": 1854,
+      "row_identity_groups_spanning_multiple_splits": 0
+    },
+    "metrics": {
+      "f1": 0.209026,
+      "n": 43838,
+      "n_positive": 54,
+      "pr_auc": 0.716043,
+      "precision": 0.119891,
+      "recall": 0.814815,
+      "roc_auc": 0.977447
+    },
+    "model_name": "finmind_fraud_ulb",
+    "model_type": "LogisticRegression (class_weight=balanced)",
+    "status": "validated",
+    "target": "Class",
+    "task": "fraud_detection",
+    "trained_at": "2026-10-04T17:00:27.323593+00:00",
+    "version": "1.0"
+  },
+  "finmind_fraud_ulb_hgb": {
+    "artifact_path": "data/models/finmind_fraud_ulb_hgb/model.pkl",
+    "checksum": "5dce018c7bbd2bcd34b2259ca31f6910e1be2cf7ecfb08f779a8e56dacf2d69d",
+    "dataset": "ULB Credit Card Fraud (mlg-ulb/creditcardfraud)",
+    "environment": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "python": "3.9.6",
+      "scikit_learn": "1.6.1",
+      "scipy": "1.13.1",
+      "statsmodels": "0.14.6"
+    },
+    "features": [
+      "Amount",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6",
+      "V7",
+      "V8",
+      "V9",
+      "V10",
+      "V11",
+      "V12",
+      "V13",
+      "V14",
+      "V15",
+      "V16",
+      "V17",
+      "V18",
+      "V19",
+      "V20",
+      "V21",
+      "V22",
+      "V23",
+      "V24",
+      "V25",
+      "V26",
+      "V27",
+      "V28"
+    ],
+    "hyperparameters": {
+      "random_state": 42,
+      "time_feature_excluded": true
+    },
+    "leakage_audit": {
+      "feature_collision_groups_spanning_multiple_splits": 1313,
+      "feature_vector_collisions_total": 14293,
+      "interpretation": "row identity = full raw record (leakage if it spans splits); feature collisions = distinct transactions with identical feature vectors (informational, not leakage)",
+      "passed": true,
+      "row_identity_duplicates_total": 1854,
+      "row_identity_groups_spanning_multiple_splits": 0
+    },
+    "metrics": {
+      "f1": 0.22113,
+      "n": 43838,
+      "n_positive": 54,
+      "pr_auc": 0.754468,
+      "precision": 0.127479,
+      "recall": 0.833333,
+      "roc_auc": 0.944383
+    },
+    "model_name": "finmind_fraud_ulb_hgb",
+    "model_type": "HistGradientBoostingClassifier",
+    "status": "validated",
+    "target": "Class",
+    "task": "fraud_detection",
+    "trained_at": "2026-10-04T17:00:27.330498+00:00",
+    "version": "1.0"
+  },
+  "finmind_fraud_ulb_iforest": {
+    "artifact_path": "data/models/finmind_fraud_ulb_iforest/model.pkl",
+    "checksum": "a94704f2634007aa456047891b4de1a54177bb48c0ceea1da1765c30bbba8074",
+    "dataset": "ULB Credit Card Fraud (mlg-ulb/creditcardfraud)",
+    "environment": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "python": "3.9.6",
+      "scikit_learn": "1.6.1",
+      "scipy": "1.13.1",
+      "statsmodels": "0.14.6"
+    },
+    "features": [
+      "Amount",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6",
+      "V7",
+      "V8",
+      "V9",
+      "V10",
+      "V11",
+      "V12",
+      "V13",
+      "V14",
+      "V15",
+      "V16",
+      "V17",
+      "V18",
+      "V19",
+      "V20",
+      "V21",
+      "V22",
+      "V23",
+      "V24",
+      "V25",
+      "V26",
+      "V27",
+      "V28"
+    ],
+    "hyperparameters": {
+      "random_state": 42,
+      "time_feature_excluded": true
+    },
+    "leakage_audit": {
+      "feature_collision_groups_spanning_multiple_splits": 1313,
+      "feature_vector_collisions_total": 14293,
+      "interpretation": "row identity = full raw record (leakage if it spans splits); feature collisions = distinct transactions with identical feature vectors (informational, not leakage)",
+      "passed": true,
+      "row_identity_duplicates_total": 1854,
+      "row_identity_groups_spanning_multiple_splits": 0
+    },
+    "metrics": {
+      "f1": 0.017391,
+      "n": 43838,
+      "n_positive": 54,
+      "pr_auc": 0.045749,
+      "precision": 0.016393,
+      "recall": 0.018519,
+      "roc_auc": 0.949019
+    },
+    "model_name": "finmind_fraud_ulb_iforest",
+    "model_type": "IsolationForest (fit on train normals only)",
+    "status": "evaluation_only",
+    "target": "Class",
+    "task": "fraud_detection",
+    "trained_at": "2026-10-04T17:00:27.392617+00:00",
+    "version": "1.0"
+  },
+  "finmind_gru": {
+    "artifact_path": "data/models/finmind_gru/model.npz",
+    "checksum": "9aefa01bde1ce7dd76bc0df748df5e0858ec5553ac13eb4d0182977a557d47f5",
+    "dataset": "Online Retail (UCI 352) + Sample Superstore daily series, pooled",
+    "environment": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "python": "3.9.6",
+      "scikit_learn": "1.6.1",
+      "scipy": "1.13.1",
+      "statsmodels": "0.14.6"
+    },
+    "features": [
+      "daily_value_zscored"
+    ],
+    "hyperparameters": {
+      "adam_beta1": 0.9,
+      "adam_beta2": 0.999,
+      "adam_eps": 1e-08,
+      "batch_mode": "full-batch",
+      "early_stopping": "validation MSE (pooled), restore best weights",
+      "gradient_clip": 5.0,
+      "hidden_size": 16,
+      "loss": "MSE",
+      "lr": 0.03,
+      "max_epochs": 150,
+      "optimizer": "Adam",
+      "patience": 15,
+      "random_seed": 42,
+      "seq_len": 14,
+      "training": {
+        "best_epoch": 46,
+        "best_val_mse": 1.036511021263894,
+        "epochs_run": 61,
+        "final_val_mse": 1.1029964172710796,
+        "train_seconds": 4.1,
+        "train_windows": 1261,
+        "val_windows": 270
+      }
+    },
+    "metrics": {
+      "pooled_one_step_scaled": {
+        "mae": 0.987987,
+        "mape_excluded_points": 0,
+        "mape_pct": 164.9642,
+        "n": 273,
+        "r2": -0.039956,
+        "rmse": 1.470738
+      },
+      "pooled_recursive_30d_scaled": {
+        "mae": 0.751233,
+        "mape_excluded_points": 0,
+        "mape_pct": 132.0262,
+        "n": 60,
+        "r2": 0.266414,
+        "rmse": 0.927551
+      }
+    },
+    "model_name": "finmind_gru",
+    "model_type": "GRU",
+    "selected": true,
+    "status": "validated",
+    "target": "next_day_value (recursive multi-step at inference)",
+    "task": "forecasting",
+    "trained_at": "2026-10-04T17:49:44.886981+00:00",
+    "training_days": 1832,
+    "version": "1.0"
+  },
+  "finmind_lstm": {
+    "artifact_path": "data/models/finmind_lstm/model.npz",
+    "checksum": "c3465ddd4e3ba53df0d0521f9721f20930391ec4e94ee3c9a3f76d9048c33e4a",
+    "dataset": "Online Retail (UCI 352) + Sample Superstore daily series, pooled",
+    "environment": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "python": "3.9.6",
+      "scikit_learn": "1.6.1",
+      "scipy": "1.13.1",
+      "statsmodels": "0.14.6"
+    },
+    "features": [
+      "daily_value_zscored"
+    ],
+    "hyperparameters": {
+      "adam_beta1": 0.9,
+      "adam_beta2": 0.999,
+      "adam_eps": 1e-08,
+      "batch_mode": "full-batch",
+      "early_stopping": "validation MSE (pooled), restore best weights",
+      "gradient_clip": 5.0,
+      "hidden_size": 16,
+      "loss": "MSE",
+      "lr": 0.03,
+      "max_epochs": 150,
+      "optimizer": "Adam",
+      "patience": 15,
+      "random_seed": 42,
+      "seq_len": 14,
+      "training": {
+        "best_epoch": 28,
+        "best_val_mse": 1.1136683943909857,
+        "epochs_run": 43,
+        "final_val_mse": 1.1577395145028786,
+        "train_seconds": 3.31,
+        "train_windows": 1261,
+        "val_windows": 270
+      }
+    },
+    "metrics": {
+      "pooled_one_step_scaled": {
+        "mae": 1.057818,
+        "mape_excluded_points": 0,
+        "mape_pct": 203.0643,
+        "n": 273,
+        "r2": -0.099384,
+        "rmse": 1.512177
+      },
+      "pooled_recursive_30d_scaled": {
+        "mae": 0.907826,
+        "mape_excluded_points": 0,
+        "mape_pct": 142.7751,
+        "n": 60,
+        "r2": 0.064563,
+        "rmse": 1.047417
+      }
+    },
+    "model_name": "finmind_lstm",
+    "model_type": "LSTM",
+    "selected": false,
+    "status": "validated",
+    "target": "next_day_value (recursive multi-step at inference)",
+    "task": "forecasting",
+    "trained_at": "2026-10-04T17:49:44.885545+00:00",
+    "training_days": 1832,
+    "version": "1.0"
+  },
+  "finmind_ma7": {
+    "artifact_path": null,
+    "checksum": null,
+    "dataset": "Online Retail (UCI 352) + Sample Superstore daily series, pooled",
+    "environment": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "python": "3.9.6",
+      "scikit_learn": "1.6.1",
+      "scipy": "1.13.1",
+      "statsmodels": "0.14.6"
+    },
+    "features": [
+      "daily_value_zscored"
+    ],
+    "hyperparameters": {
+      "window": 7
+    },
+    "metrics": {
+      "pooled_one_step_scaled": {
+        "mae": 1.041605,
+        "mape_excluded_points": 0,
+        "mape_pct": 269.7649,
+        "n": 273,
+        "r2": 0.030972,
+        "rmse": 1.419698
+      },
+      "pooled_recursive_30d_scaled": {
+        "mae": 0.858088,
+        "mape_excluded_points": 0,
+        "mape_pct": 114.2859,
+        "n": 60,
+        "r2": 0.10647,
+        "rmse": 1.023687
+      }
+    },
+    "model_name": "finmind_ma7",
+    "model_type": "moving average (7)",
+    "selected": false,
+    "status": "validated",
+    "target": "next_day_value",
+    "task": "forecasting",
+    "trained_at": "2026-10-04T17:49:44.887639+00:00",
+    "training_days": 1832,
+    "version": "1.0"
+  },
+  "finmind_naive": {
+    "artifact_path": null,
+    "checksum": null,
+    "dataset": "Online Retail (UCI 352) + Sample Superstore daily series, pooled",
+    "environment": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "python": "3.9.6",
+      "scikit_learn": "1.6.1",
+      "scipy": "1.13.1",
+      "statsmodels": "0.14.6"
+    },
+    "features": [
+      "daily_value_zscored"
+    ],
+    "hyperparameters": {},
+    "metrics": {
+      "pooled_one_step_scaled": {
+        "mae": 1.317778,
+        "mape_excluded_points": 0,
+        "mape_pct": 430.2901,
+        "n": 273,
+        "r2": -0.507242,
+        "rmse": 1.770595
+      },
+      "pooled_recursive_30d_scaled": {
+        "mae": 1.361155,
+        "mape_excluded_points": 0,
+        "mape_pct": 165.4478,
+        "n": 60,
+        "r2": -1.86749,
+        "rmse": 1.833848
+      }
+    },
+    "model_name": "finmind_naive",
+    "model_type": "naive last-value",
+    "selected": false,
+    "status": "validated",
+    "target": "next_day_value",
+    "task": "forecasting",
+    "trained_at": "2026-10-04T17:49:44.887634+00:00",
+    "training_days": 1832,
+    "version": "1.0"
+  },
+  "finmind_risk_credit": {
+    "all_candidates_test_metrics": {
+      "hgb": {
+        "f1": 0.52666,
+        "n": 4501,
+        "n_positive": 996,
+        "pr_auc": 0.538621,
+        "precision": 0.492995,
+        "recall": 0.565261,
+        "roc_auc": 0.770172
+      },
+      "logistic": {
+        "f1": 0.486696,
+        "n": 4501,
+        "n_positive": 996,
+        "pr_auc": 0.487842,
+        "precision": 0.543317,
+        "recall": 0.440763,
+        "roc_auc": 0.717428
+      }
+    },
+    "artifact_path": "data/models/finmind_risk_credit/model.pkl",
+    "checksum": "bd6aaa167542c79af732465f4befabc401ba2315463899af22d71d74273c921e",
+    "dataset": "Default of Credit Card Clients (uciml/default-of-credit-card-clients-dataset)",
+    "environment": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "python": "3.9.6",
+      "scikit_learn": "1.6.1",
+      "scipy": "1.13.1",
+      "statsmodels": "0.14.6"
+    },
+    "features": [
+      "LIMIT_BAL",
+      "SEX",
+      "EDUCATION",
+      "MARRIAGE",
+      "AGE",
+      "PAY_0",
+      "PAY_2",
+      "PAY_3",
+      "PAY_4",
+      "PAY_5",
+      "PAY_6",
+      "BILL_AMT1",
+      "BILL_AMT2",
+      "BILL_AMT3",
+      "BILL_AMT4",
+      "BILL_AMT5",
+      "BILL_AMT6",
+      "PAY_AMT1",
+      "PAY_AMT2",
+      "PAY_AMT3",
+      "PAY_AMT4",
+      "PAY_AMT5",
+      "PAY_AMT6"
+    ],
+    "hyperparameters": {
+      "class_weight": "balanced",
+      "random_state": 42,
+      "selection": "validation PR-AUC"
+    },
+    "metrics": {
+      "f1": 0.52666,
+      "n": 4501,
+      "n_positive": 996,
+      "pr_auc": 0.538621,
+      "precision": 0.492995,
+      "recall": 0.565261,
+      "roc_auc": 0.770172
+    },
+    "model_name": "finmind_risk_credit",
+    "model_type": "HistGradientBoostingClassifier",
+    "serving": "artifact_only (no live credit-feature schema in FinMind)",
+    "status": "validated",
+    "target": "default",
+    "task": "credit_risk_classification",
+    "trained_at": "2026-10-04T13:44:56.463273+00:00",
+    "version": "1.0"
+  },
+  "finmind_risk_german": {
+    "all_candidates_test_metrics": {
+      "hgb": {
+        "f1": 0.586207,
+        "n": 151,
+        "n_positive": 45,
+        "pr_auc": 0.597189,
+        "precision": 0.478873,
+        "recall": 0.755556,
+        "roc_auc": 0.777568
+      },
+      "logistic": {
+        "f1": 0.55914,
+        "n": 151,
+        "n_positive": 45,
+        "pr_auc": 0.52936,
+        "precision": 0.541667,
+        "recall": 0.577778,
+        "roc_auc": 0.734172
+      }
+    },
+    "artifact_path": "data/models/finmind_risk_german/model.pkl",
+    "checksum": "f33f07bebff1181acacb6e860a3123f58bce303db7a64753718f3416111b8d54",
+    "dataset": "Statlog German Credit Data (UCI 144)",
+    "environment": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "python": "3.9.6",
+      "scikit_learn": "1.6.1",
+      "scipy": "1.13.1",
+      "statsmodels": "0.14.6"
+    },
+    "features": [
+      "chk_acct",
+      "duration_months",
+      "credit_history",
+      "purpose",
+      "credit_amount",
+      "savings_acct",
+      "present_employment",
+      "installment_rate",
+      "personal_status",
+      "other_debtors",
+      "present_residence",
+      "property",
+      "age",
+      "other_installments",
+      "housing",
+      "n_credits",
+      "job",
+      "n_people",
+      "telephone",
+      "foreign_worker"
+    ],
+    "hyperparameters": {
+      "class_weight": "balanced",
+      "random_state": 42,
+      "selection": "validation PR-AUC"
+    },
+    "metrics": {
+      "f1": 0.55914,
+      "n": 151,
+      "n_positive": 45,
+      "pr_auc": 0.52936,
+      "precision": 0.541667,
+      "recall": 0.577778,
+      "roc_auc": 0.734172
+    },
+    "model_name": "finmind_risk_german",
+    "model_type": "LogisticRegression",
+    "serving": "artifact_only (no live credit-feature schema in FinMind)",
+    "status": "validated",
+    "target": "default",
+    "task": "credit_risk_classification",
+    "trained_at": "2026-10-04T13:44:57.235007+00:00",
+    "version": "1.0"
+  },
+  "finmind_rnn": {
+    "artifact_path": "data/models/finmind_rnn/model.npz",
+    "checksum": "fd94457ac7d4b4d52b9941a596e1e0780b69876d4c2a0cb14c8ee3a4f8f3c071",
+    "dataset": "Online Retail (UCI 352) + Sample Superstore daily series, pooled",
+    "environment": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "python": "3.9.6",
+      "scikit_learn": "1.6.1",
+      "scipy": "1.13.1",
+      "statsmodels": "0.14.6"
+    },
+    "features": [
+      "daily_value_zscored"
+    ],
+    "hyperparameters": {
+      "adam_beta1": 0.9,
+      "adam_beta2": 0.999,
+      "adam_eps": 1e-08,
+      "batch_mode": "full-batch",
+      "early_stopping": "validation MSE (pooled), restore best weights",
+      "gradient_clip": 5.0,
+      "hidden_size": 16,
+      "loss": "MSE",
+      "lr": 0.03,
+      "max_epochs": 150,
+      "optimizer": "Adam",
+      "patience": 15,
+      "random_seed": 42,
+      "seq_len": 14,
+      "training": {
+        "best_epoch": 15,
+        "best_val_mse": 1.0834430477547872,
+        "epochs_run": 30,
+        "final_val_mse": 1.1279908451734115,
+        "train_seconds": 0.44,
+        "train_windows": 1261,
+        "val_windows": 270
+      }
+    },
+    "metrics": {
+      "pooled_one_step_scaled": {
+        "mae": 1.016605,
+        "mape_excluded_points": 0,
+        "mape_pct": 206.979,
+        "n": 273,
+        "r2": -0.056073,
+        "rmse": 1.482091
+      },
+      "pooled_recursive_30d_scaled": {
+        "mae": 0.805266,
+        "mape_excluded_points": 0,
+        "mape_pct": 136.2248,
+        "n": 60,
+        "r2": 0.137123,
+        "rmse": 1.005975
+      }
+    },
+    "model_name": "finmind_rnn",
+    "model_type": "RNN",
+    "selected": false,
+    "status": "validated",
+    "target": "next_day_value (recursive multi-step at inference)",
+    "task": "forecasting",
+    "trained_at": "2026-10-04T17:49:44.883728+00:00",
+    "training_days": 1832,
+    "version": "1.0"
+  },
+  "iforest_fraud_v1": {
+    "artifact_path": "data/models/fraud/iforest_fraud_v1.pkl",
+    "checksum": "93a8c9fc2d3ff85e9028e1e39ab962cd",
+    "checksum_algorithm": "md5",
+    "dataset": "mlg-ulb/creditcardfraud",
+    "deprecation_reason": "AUDIT: (1) schema mismatch \u2014 PCA features do not exist for FinMind business transactions, so the artifact was never usable by the live service; (2) fitted on a random split of the full dataset, so the model saw its own test rows during fitting. Superseded by finmind_anomaly (PaySim, live feature schema, chronological train split).",
+    "environment": null,
+    "features": [
+      "V1..V28 PCA components (ULB schema)"
+    ],
+    "metrics": {
+      "f1": 0.117,
+      "precision": 0.1134,
+      "recall": 0.1209
+    },
+    "model_name": "iforest_fraud_v1",
+    "model_type": "IsolationForest (legacy)",
+    "status": "deprecated",
+    "target": "Class",
+    "task": "fraud_detection",
+    "trained_at": "2026-09-23T06:36:31.212825",
+    "version": "1.0"
+  },
+  "lstm_forecast_v1": {
+    "artifact_path": "data/models/forecasting/lstm_forecast_v1.pkl",
+    "checksum": "474650b3b91d8e2b2cfa12222e0cf5ca",
+    "checksum_algorithm": "md5",
+    "dataset": "uciml/default-of-credit-card",
+    "deprecation_reason": "AUDIT: the UCI Default of Credit Card Clients dataset is a tabular client snapshot with NO temporal ordering; slicing its BILL_AMT1 column into a pseudo-series was an invalid use for forecasting (MAPE 276.69%). Superseded by finmind_rnn/lstm/gru/ar14 trained on genuine daily financial time series.",
+    "environment": null,
+    "features": [
+      "BILL_AMT1 rows treated as a time series (invalid)"
+    ],
+    "metrics": {
+      "mae": 56503.03,
+      "mape": 276.69,
+      "rmse": 82019.68
+    },
+    "model_name": "lstm_forecast_v1",
+    "model_type": "LSTM (legacy)",
+    "status": "deprecated",
+    "target": "n/a",
+    "task": "forecasting",
+    "trained_at": "2026-09-25T04:29:09.813001",
+    "version": "2.0"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "model": "PooledARForecaster (OLS)",
+  "seq_len": 14,
+  "features": [
+    "daily_value_zscored"
+  ],
+  "target": "next_day_value",
+  "scaling": "per-series z-score fitted on train segment",
+  "datasets": [
+    "online_retail",
+    "superstore"
+  ],
+  "hyperparameters": {
+    "lags": 14,
+    "estimator": "OLS lstsq",
+    "random_seed": "deterministic (closed form)"
+  },
+  "trained_at": "2026-10-04T17:49:44.887284+00:00",
+  "environment": {
+    "python": "3.9.6",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "numpy": "2.0.2",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.6.1",
+    "statsmodels": "0.14.6",
+    "scipy": "1.13.1"
+  }
+}

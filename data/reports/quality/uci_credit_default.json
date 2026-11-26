@@ -1,0 +1,161 @@
+{
+  "analyzed_at": "2026-10-04T12:09:15.613640+00:00",
+  "class_balance": {
+    "counts": {
+      "0": 23364,
+      "1": 6636
+    },
+    "positive_rate": 0.2212,
+    "target": "default.payment.next.month"
+  },
+  "column_dtypes": {
+    "AGE": "int64",
+    "BILL_AMT1": "float64",
+    "BILL_AMT2": "float64",
+    "BILL_AMT3": "float64",
+    "BILL_AMT4": "float64",
+    "BILL_AMT5": "float64",
+    "BILL_AMT6": "float64",
+    "EDUCATION": "int64",
+    "ID": "int64",
+    "LIMIT_BAL": "float64",
+    "MARRIAGE": "int64",
+    "PAY_0": "int64",
+    "PAY_2": "int64",
+    "PAY_3": "int64",
+    "PAY_4": "int64",
+    "PAY_5": "int64",
+    "PAY_6": "int64",
+    "PAY_AMT1": "float64",
+    "PAY_AMT2": "float64",
+    "PAY_AMT3": "float64",
+    "PAY_AMT4": "float64",
+    "PAY_AMT5": "float64",
+    "PAY_AMT6": "float64",
+    "SEX": "int64",
+    "default.payment.next.month": "int64"
+  },
+  "columns": 25,
+  "dataset": "uci_credit_default",
+  "exact_duplicate_rows": 0,
+  "missing": {},
+  "missing_total_cells": 0,
+  "outliers_iqr": {
+    "AGE": {
+      "count": 272,
+      "iqr_lower": 8.5,
+      "iqr_upper": 60.5
+    },
+    "BILL_AMT1": {
+      "count": 2400,
+      "iqr_lower": -91739.625,
+      "iqr_upper": 162389.375
+    },
+    "BILL_AMT2": {
+      "count": 2395,
+      "iqr_lower": -88547.5,
+      "iqr_upper": 155538.5
+    },
+    "BILL_AMT3": {
+      "count": 2469,
+      "iqr_lower": -83581.5,
+      "iqr_upper": 146412.5
+    },
+    "BILL_AMT4": {
+      "count": 2622,
+      "iqr_lower": -75942.125,
+      "iqr_upper": 132774.875
+    },
+    "BILL_AMT5": {
+      "count": 2725,
+      "iqr_lower": -70878.25,
+      "iqr_upper": 122831.75
+    },
+    "BILL_AMT6": {
+      "count": 2693,
+      "iqr_lower": -70657.375,
+      "iqr_upper": 121111.625
+    },
+    "EDUCATION": {
+      "count": 454,
+      "iqr_lower": -0.5,
+      "iqr_upper": 3.5
+    },
+    "LIMIT_BAL": {
+      "count": 167,
+      "iqr_lower": -235000.0,
+      "iqr_upper": 525000.0
+    },
+    "PAY_0": {
+      "count": 3130,
+      "iqr_lower": -2.5,
+      "iqr_upper": 1.5
+    },
+    "PAY_2": {
+      "count": 4410,
+      "iqr_lower": -2.5,
+      "iqr_upper": 1.5
+    },
+    "PAY_3": {
+      "count": 4209,
+      "iqr_lower": -2.5,
+      "iqr_upper": 1.5
+    },
+    "PAY_4": {
+      "count": 3508,
+      "iqr_lower": -2.5,
+      "iqr_upper": 1.5
+    },
+    "PAY_5": {
+      "count": 2968,
+      "iqr_lower": -2.5,
+      "iqr_upper": 1.5
+    },
+    "PAY_6": {
+      "count": 3079,
+      "iqr_lower": -2.5,
+      "iqr_upper": 1.5
+    },
+    "PAY_AMT1": {
+      "count": 2745,
+      "iqr_lower": -5009.0,
+      "iqr_upper": 11015.0
+    },
+    "PAY_AMT2": {
+      "count": 2714,
+      "iqr_lower": -5417.5,
+      "iqr_upper": 11250.5
+    },
+    "PAY_AMT3": {
+      "count": 2598,
+      "iqr_lower": -5782.5,
+      "iqr_upper": 10677.5
+    },
+    "PAY_AMT4": {
+      "count": 2994,
+      "iqr_lower": -5279.875,
+      "iqr_upper": 9589.125
+    },
+    "PAY_AMT5": {
+      "count": 2945,
+      "iqr_lower": -5416.0,
+      "iqr_upper": 9700.0
+    },
+    "PAY_AMT6": {
+      "count": 2958,
+      "iqr_lower": -5705.625,
+      "iqr_upper": 9823.375
+    },
+    "default.payment.next.month": {
+      "count": 6636,
+      "iqr_lower": 0.0,
+      "iqr_upper": 0.0
+    }
+  },
+  "rows": 30000,
+  "transformation_decisions": {
+    "note": "this dataset is tabular (client snapshot), NOT a time series; the previous attempt to treat BILL_AMT1 rows as a temporal series was invalid (see audit)",
+    "rows_raw": 30000,
+    "split_rule": "no timestamps exist -> stratified random split (documented, valid for this task)"
+  }
+}

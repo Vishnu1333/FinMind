@@ -1,0 +1,76 @@
+{
+  "analyzed_at": "2026-10-04T16:54:18.985775+00:00",
+  "class_balance": {
+    "counts": {
+      "0": 6354407,
+      "1": 8213
+    },
+    "positive_rate": 0.001291,
+    "target": "isFraud"
+  },
+  "column_dtypes": {
+    "amount": "float64",
+    "isFlaggedFraud": "int64",
+    "isFraud": "int64",
+    "nameOrig": "object",
+    "oldbalanceDest": "float64",
+    "oldbalanceOrg": "float64",
+    "step": "int64",
+    "type": "category"
+  },
+  "columns": 8,
+  "dataset": "paysim1",
+  "exact_duplicate_rows": 0,
+  "missing": {},
+  "missing_total_cells": 0,
+  "outliers_iqr": {
+    "amount": {
+      "count": 338078,
+      "iqr_lower": -279608.29125,
+      "iqr_upper": 501719.33875
+    },
+    "isFlaggedFraud": {
+      "count": 16,
+      "iqr_lower": 0.0,
+      "iqr_upper": 0.0
+    },
+    "isFraud": {
+      "count": 8213,
+      "iqr_lower": 0.0,
+      "iqr_upper": 0.0
+    },
+    "oldbalanceDest": {
+      "count": 786135,
+      "iqr_lower": -1414555.06125,
+      "iqr_upper": 2357591.76875
+    },
+    "oldbalanceOrg": {
+      "count": 1112507,
+      "iqr_lower": -160972.7625,
+      "iqr_upper": 268287.9375
+    },
+    "step": {
+      "count": 102688,
+      "iqr_lower": -112.5,
+      "iqr_upper": 603.5
+    }
+  },
+  "rows": 6362620,
+  "time_index": {
+    "column": "step",
+    "max": 743,
+    "min": 1,
+    "semantics": "1 step = 1 hour of simulated time; 744 steps = 31 days"
+  },
+  "transformation_decisions": {
+    "chronological_split_rule": "split on `step` (1 step = 1 hour): train < val < test, no shuffle",
+    "duplicate_feature_rows": 1675,
+    "isflaggedfraud_audit": {
+      "all_flagged_are_fraud": true,
+      "decision": "excluded from features: it is an upstream detector's output (target leakage)",
+      "rows_flagged": 16
+    },
+    "post_transaction_balances": "newbalanceOrig/newbalanceDest NOT loaded: dataset authors state frauds are cancelled so these leak the outcome (Phase 15).",
+    "rows_raw": 6362620
+  }
+}

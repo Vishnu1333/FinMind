@@ -1,0 +1,39 @@
+{
+  "checksum": {
+    "data/raw/german_credit/statlog-german-credit-data.zip": "e12d9d5def6845c0622634a1cd2ab87fa470668c4298f1ec52a4e403376a435b"
+  },
+  "citation": "Hans Hofmann, UCI Statlog German Credit Data, 1994.",
+  "columns": 21,
+  "download_date": "2026-10-04",
+  "features": [
+    "chk_acct",
+    "duration_months",
+    "credit_history",
+    "purpose",
+    "credit_amount",
+    "savings_acct",
+    "present_employment",
+    "installment_rate",
+    "personal_status",
+    "other_debtors",
+    "present_residence",
+    "property",
+    "age",
+    "other_installments",
+    "housing",
+    "n_credits",
+    "job",
+    "n_people",
+    "telephone",
+    "foreign_worker"
+  ],
+  "license": "CC BY 4.0 (as listed by UCI)",
+  "name": "Statlog German Credit Data",
+  "prepared_at": "2026-10-04T12:09:15.667992+00:00",
+  "processed": "data/processed/risk/german_credit.npz",
+  "quality_report": "data/reports/quality/german_credit.json",
+  "rows": 1000,
+  "source": "UCI ML Repository (dataset 144) \u2014 https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data",
+  "target": "credit risk (1 = bad)",
+  "task": "credit_risk_classification"
+}

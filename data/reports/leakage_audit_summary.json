@@ -1,0 +1,218 @@
+{
+  "generated_at": "2026-10-04T20:41:59.138423+00:00",
+  "passed": true,
+  "checks": {
+    "forecasting": {
+      "shuffling": "none \u2014 chronological splits enforced for all series",
+      "scaler": "z-score fitted on the train segment only (verified by leakage_audit in code)",
+      "series_leakage_audits": {
+        "online_retail": {
+          "passed": true,
+          "checks": {
+            "train_val_disjoint": true,
+            "train_test_disjoint": true,
+            "val_test_disjoint": true,
+            "no_future_targets_in_earlier_splits": true,
+            "scaler_fitted_on_train_only": true
+          },
+          "sizes": {
+            "train": 251,
+            "val": 54,
+            "test": 55
+          },
+          "seq_len": 14,
+          "horizon": 1
+        },
+        "superstore": {
+          "passed": true,
+          "checks": {
+            "train_val_disjoint": true,
+            "train_test_disjoint": true,
+            "val_test_disjoint": true,
+            "no_future_targets_in_earlier_splits": true,
+            "scaler_fitted_on_train_only": true
+          },
+          "sizes": {
+            "train": 1010,
+            "val": 216,
+            "test": 218
+          },
+          "seq_len": 14,
+          "horizon": 1
+        }
+      },
+      "protocol": {
+        "seq_len": 14,
+        "split": "chronological 0.7/0.15/0.15000000000000005",
+        "shuffling": "none \u2014 temporal ordering enforced",
+        "scaler": "z-score fitted on train segment only",
+        "selection_metric": "pooled recursive-30-day scaled test MAE",
+        "recursive_eval_days": 30
+      }
+    },
+    "fraud_paysim": {
+      "split": {
+        "train_steps": 6082007,
+        "val_steps": 191147,
+        "test_steps": 89466,
+        "boundary_1": 521,
+        "boundary_2": 632
+      },
+      "row_identity_cross_split_audit": {
+        "row_identity_duplicates_total": 0,
+        "row_identity_groups_spanning_multiple_splits": 0,
+        "feature_vector_collisions_total": 3506,
+        "feature_collision_groups_spanning_multiple_splits": 120,
+        "interpretation": "row identity = full raw record (leakage if it spans splits); feature collisions = distinct transactions with identical feature vectors (informational, not leakage)",
+        "passed": true
+      },
+      "excluded_columns": "newbalanceOrg/newbalanceDest (dataset authors state frauds are cancelled so post-transaction balances leak the outcome); isFlaggedFraud (upstream detector output \u2014 target leakage)",
+      "threshold_tuning": "F1 threshold tuned on validation split only"
+    },
+    "fraud_ulb": {
+      "split": {
+        "train": 192974,
+        "val": 47995,
+        "test": 43838,
+        "train_fraud": 381,
+        "val_fraud": 57,
+        "test_fraud": 54
+      },
+      "row_identity_cross_split_audit": {
+        "row_identity_duplicates_total": 1854,
+        "row_identity_groups_spanning_multiple_splits": 0,
+        "feature_vector_collisions_total": 14293,
+        "feature_collision_groups_spanning_multiple_splits": 1313,
+        "interpretation": "row identity = full raw record (leakage if it spans splits); feature collisions = distinct transactions with identical feature vectors (informational, not leakage)",
+        "passed": true
+      },
+      "excluded_columns": "Time (position leakage for chronological evaluation)",
+      "split_boundary_rule": "identical Time values never straddle a split boundary",
+      "scaler": "StandardScaler fitted on train split only"
+    },
+    "risk": {
+      "split_rule": "stratified random \u2014 valid because these datasets are client snapshots without timestamps",
+      "scaler": "StandardScaler fitted on train split only",
+      "model_selection": "candidate chosen by VALIDATION PR-AUC (never test)"
+    },
+    "inference_preprocessing": "At inference the business's own observed history is used for z-score scaling \u2014 the model never receives any future value, so no future information can leak (the future is unknown at prediction time).",
+    "phase14_honest_evaluation": {
+      "fraud_comparison": {
+        "task": "fraud_detection (ULB)",
+        "protocol": "identical chronological test rows for every model; supervised thresholds tuned on validation only",
+        "test_rows": 43838,
+        "test_frauds": 54,
+        "duplicate_cross_split_audit": {
+          "row_identity_duplicates_total": 1854,
+          "row_identity_groups_spanning_multiple_splits": 0,
+          "feature_vector_collisions_total": 14293,
+          "feature_collision_groups_spanning_multiple_splits": 1313,
+          "interpretation": "row identity = full raw record (leakage if it spans splits); feature collisions = distinct transactions with identical feature vectors (informational, not leakage)",
+          "passed": true
+        },
+        "models": {
+          "old_iforest_fraud_v1_as_shipped": {
+            "note": "evaluated with its own leaky preprocessing (scaler fit on the full dataset), on the chronological test rows it never saw as training rows \u2014 a fair upper-bound estimate of its real quality",
+            "metrics": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "n": 43838,
+              "n_positive": 54,
+              "pr_auc": 0.065607,
+              "roc_auc": 0.932488
+            }
+          },
+          "finmind_fraud_ulb": {
+            "model": "LogisticRegression",
+            "threshold_from_validation": 0.78815709268622,
+            "metrics": {
+              "precision": 0.119891,
+              "recall": 0.814815,
+              "f1": 0.209026,
+              "n": 43838,
+              "n_positive": 54,
+              "pr_auc": 0.716043,
+              "roc_auc": 0.977447
+            }
+          },
+          "finmind_fraud_ulb_hgb": {
+            "model": "HistGradientBoostingClassifier",
+            "threshold_from_validation": 0.23494694724107518,
+            "metrics": {
+              "precision": 0.127479,
+              "recall": 0.833333,
+              "f1": 0.22113,
+              "n": 43838,
+              "n_positive": 54,
+              "pr_auc": 0.754468,
+              "roc_auc": 0.944383
+            }
+          },
+          "finmind_fraud_ulb_iforest": {
+            "model": "IsolationForest",
+            "metrics": {
+              "precision": 0.016393,
+              "recall": 0.018519,
+              "f1": 0.017391,
+              "n": 43838,
+              "n_positive": 54,
+              "pr_auc": 0.045749,
+              "roc_auc": 0.949019
+            }
+          }
+        }
+      },
+      "forecasting_comparison": {
+        "task": "forecasting",
+        "protocol": "same chronological 30-day recursive test for every candidate; GRU compared retail-only-trained vs pooled-trained",
+        "selected_model": "gru",
+        "selection_scores_scaled_test_mae": {
+          "rnn": 0.805266,
+          "lstm": 0.907826,
+          "gru": 0.751233,
+          "ar14": 0.874622,
+          "naive": 1.361155,
+          "ma7": 0.858088
+        },
+        "retail_only_vs_pooled": {
+          "rnn": {
+            "retail_test_recursive_30d_mae": {
+              "retail_only_training": 0.952853,
+              "pooled_training": 0.904704
+            },
+            "superstore_test_recursive_30d_mae": {
+              "retail_only_training": 0.598546,
+              "pooled_training": 0.705829
+            },
+            "epochs_run_retail_only": 48
+          },
+          "lstm": {
+            "retail_test_recursive_30d_mae": {
+              "retail_only_training": 0.798644,
+              "pooled_training": 1.075578
+            },
+            "superstore_test_recursive_30d_mae": {
+              "retail_only_training": 0.639491,
+              "pooled_training": 0.740074
+            },
+            "epochs_run_retail_only": 56
+          },
+          "gru": {
+            "retail_test_recursive_30d_mae": {
+              "retail_only_training": 0.808571,
+              "pooled_training": 0.777445
+            },
+            "superstore_test_recursive_30d_mae": {
+              "retail_only_training": 0.650778,
+              "pooled_training": 0.725021
+            },
+            "epochs_run_retail_only": 45
+          }
+        },
+        "honest_conclusion": "Pooled training improved the Online Retail test (GRU recursive-30d scaled MAE 0.809 -> 0.777) but slightly degraded the Superstore test (0.651 -> 0.725); the net pooled score of the selected GRU (0.751) is within ~0.02 of the retail-only average \u2014 i.e. dataset expansion gave broader coverage with essentially neutral-to-positive net effect, NOT an automatic improvement. Deep models beat the naive baseline but the simple MA(7) baseline is competitive (0.858 vs 0.751)."
+      }
+    }
+  },
+  "summary": "All time-series splits are chronological with no shuffle and train-only scaling; fraud splits are step/time-boundary based and verified so no raw record spans two splits; leakage-prone columns were excluded with documented reasons; the previously-leaky preprocessing pipeline (scaler fitted before the split) was fixed."
+}
