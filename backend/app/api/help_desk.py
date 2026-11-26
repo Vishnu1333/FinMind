@@ -16,7 +16,7 @@ class TicketResponse(pydantic.BaseModel):
     category: str
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class CreateTicketRequest(pydantic.BaseModel):
     title: str
