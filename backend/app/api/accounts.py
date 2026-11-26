@@ -20,7 +20,7 @@ class AccountResponse(BaseModel):
     created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 @router.get("/accounts", response_model=List[AccountResponse])
 def list_accounts(current_user: models.User = Depends(get_current_user), db: Session = Depends(database.get_db)):
