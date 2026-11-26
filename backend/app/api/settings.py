@@ -19,7 +19,7 @@ class SettingsResponse(pydantic.BaseModel):
     notifications_data: Optional[Dict[str, Any]] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 @router.get("", response_model=SettingsResponse)
 @router.get("/", response_model=SettingsResponse, include_in_schema=False)
