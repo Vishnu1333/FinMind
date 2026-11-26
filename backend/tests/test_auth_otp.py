@@ -21,6 +21,10 @@ def test_registration_and_login_require_otp(monkeypatch):
         if existing:
             db.delete(existing)
             db.commit()
+        old_business = db.query(models.Business).filter(models.Business.name == "OTP Flow Test Business").first()
+        if old_business:
+            db.delete(old_business)
+            db.commit()
 
         response = auth.register(
             schemas.UserCreate(email=email, password="safe-test-password", business_name="OTP Flow Test Business"),
