@@ -13,7 +13,7 @@ class CategoryResponse(BaseModel):
     name: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 @router.get('/categories', response_model=List[CategoryResponse])
 def list_categories(current_user: models.User = Depends(get_current_user), db: Session = Depends(database.get_db)):
