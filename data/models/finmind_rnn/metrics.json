@@ -1,0 +1,124 @@
+{
+  "candidate": "rnn",
+  "pooled_one_step_scaled": {
+    "mae": 1.016605,
+    "rmse": 1.482091,
+    "mape_pct": 206.979,
+    "mape_excluded_points": 0,
+    "r2": -0.056073,
+    "n": 273
+  },
+  "pooled_recursive_30d_scaled": {
+    "mae": 0.805266,
+    "rmse": 1.005975,
+    "mape_pct": 136.2248,
+    "mape_excluded_points": 0,
+    "r2": 0.137123,
+    "n": 60
+  },
+  "per_series": {
+    "online_retail": {
+      "one_step_scaled": {
+        "mae": 1.572459,
+        "rmse": 2.095036,
+        "mape_pct": 101.3914,
+        "mape_excluded_points": 0,
+        "r2": -0.305926,
+        "n": 55
+      },
+      "recursive_30d_scaled": {
+        "mae": 0.904704,
+        "rmse": 1.130255,
+        "mape_pct": 75.8936,
+        "mape_excluded_points": 0,
+        "r2": 0.133957,
+        "n": 30
+      },
+      "recursive_30d_real": {
+        "mae": 16046.405925,
+        "rmse": 20046.933699,
+        "mape_pct": 36.847,
+        "mape_excluded_points": 4,
+        "r2": 0.133957,
+        "n": 30
+      }
+    },
+    "superstore": {
+      "one_step_scaled": {
+        "mae": 0.876367,
+        "rmse": 1.281959,
+        "mape_pct": 233.6181,
+        "mape_excluded_points": 0,
+        "r2": -0.057517,
+        "n": 218
+      },
+      "recursive_30d_scaled": {
+        "mae": 0.705829,
+        "rmse": 0.863998,
+        "mape_pct": 196.5559,
+        "mape_excluded_points": 0,
+        "r2": -0.485413,
+        "n": 30
+      },
+      "recursive_30d_real": {
+        "mae": 1471.077287,
+        "rmse": 1800.730678,
+        "mape_pct": 493.7727,
+        "mape_excluded_points": 4,
+        "r2": -0.485413,
+        "n": 30
+      }
+    }
+  },
+  "recursive_details": {
+    "online_retail": {
+      "scaled": {
+        "mae": 0.904704,
+        "rmse": 1.130255,
+        "mape_pct": 75.8936,
+        "mape_excluded_points": 0,
+        "r2": 0.133957,
+        "n": 30
+      },
+      "real_units": {
+        "mae": 16046.405925,
+        "rmse": 20046.933699,
+        "mape_pct": 36.847,
+        "mape_excluded_points": 4,
+        "r2": 0.133957,
+        "n": 30
+      },
+      "days_evaluated": 30,
+      "forecast_start": "2011-10-02"
+    },
+    "superstore": {
+      "scaled": {
+        "mae": 0.705829,
+        "rmse": 0.863998,
+        "mape_pct": 196.5559,
+        "mape_excluded_points": 0,
+        "r2": -0.485413,
+        "n": 30
+      },
+      "real_units": {
+        "mae": 1471.077287,
+        "rmse": 1800.730678,
+        "mape_pct": 493.7727,
+        "mape_excluded_points": 4,
+        "r2": -0.485413,
+        "n": 30
+      },
+      "days_evaluated": 30,
+      "forecast_start": "2017-05-13"
+    }
+  },
+  "training": {
+    "epochs_run": 30,
+    "best_epoch": 15,
+    "best_val_mse": 1.0834430477547872,
+    "final_val_mse": 1.1279908451734115,
+    "train_seconds": 0.44,
+    "train_windows": 1261,
+    "val_windows": 270
+  }
+}

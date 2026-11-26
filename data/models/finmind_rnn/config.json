@@ -1,0 +1,49 @@
+{
+  "cell": "rnn",
+  "seq_len": 14,
+  "hidden_size": 16,
+  "features": [
+    "daily_value_zscored"
+  ],
+  "target": "next_day_value",
+  "scaling": "per-series z-score fitted on train segment; business series z-scored with its own history at inference",
+  "datasets": [
+    "online_retail",
+    "superstore"
+  ],
+  "hyperparameters": {
+    "seq_len": 14,
+    "hidden_size": 16,
+    "lr": 0.03,
+    "optimizer": "Adam",
+    "adam_beta1": 0.9,
+    "adam_beta2": 0.999,
+    "adam_eps": 1e-08,
+    "gradient_clip": 5.0,
+    "max_epochs": 150,
+    "patience": 15,
+    "early_stopping": "validation MSE (pooled), restore best weights",
+    "batch_mode": "full-batch",
+    "loss": "MSE",
+    "random_seed": 42,
+    "training": {
+      "epochs_run": 30,
+      "best_epoch": 15,
+      "best_val_mse": 1.0834430477547872,
+      "final_val_mse": 1.1279908451734115,
+      "train_seconds": 0.44,
+      "train_windows": 1261,
+      "val_windows": 270
+    }
+  },
+  "trained_at": "2026-10-04T17:49:44.882364+00:00",
+  "environment": {
+    "python": "3.9.6",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "numpy": "2.0.2",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.6.1",
+    "statsmodels": "0.14.6",
+    "scipy": "1.13.1"
+  }
+}

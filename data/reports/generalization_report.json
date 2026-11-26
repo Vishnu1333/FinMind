@@ -1,0 +1,118 @@
+{
+  "generated_at": "2026-10-04T20:30:41.519668+00:00",
+  "fraud": {
+    "task": "fraud_detection (ULB)",
+    "protocol": "identical chronological test rows for every model; supervised thresholds tuned on validation only",
+    "test_rows": 43838,
+    "test_frauds": 54,
+    "duplicate_cross_split_audit": {
+      "row_identity_duplicates_total": 1854,
+      "row_identity_groups_spanning_multiple_splits": 0,
+      "feature_vector_collisions_total": 14293,
+      "feature_collision_groups_spanning_multiple_splits": 1313,
+      "interpretation": "row identity = full raw record (leakage if it spans splits); feature collisions = distinct transactions with identical feature vectors (informational, not leakage)",
+      "passed": true
+    },
+    "models": {
+      "old_iforest_fraud_v1_as_shipped": {
+        "note": "evaluated with its own leaky preprocessing (scaler fit on the full dataset), on the chronological test rows it never saw as training rows \u2014 a fair upper-bound estimate of its real quality",
+        "metrics": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "n": 43838,
+          "n_positive": 54,
+          "pr_auc": 0.065607,
+          "roc_auc": 0.932488
+        }
+      },
+      "finmind_fraud_ulb": {
+        "model": "LogisticRegression",
+        "threshold_from_validation": 0.78815709268622,
+        "metrics": {
+          "precision": 0.119891,
+          "recall": 0.814815,
+          "f1": 0.209026,
+          "n": 43838,
+          "n_positive": 54,
+          "pr_auc": 0.716043,
+          "roc_auc": 0.977447
+        }
+      },
+      "finmind_fraud_ulb_hgb": {
+        "model": "HistGradientBoostingClassifier",
+        "threshold_from_validation": 0.23494694724107518,
+        "metrics": {
+          "precision": 0.127479,
+          "recall": 0.833333,
+          "f1": 0.22113,
+          "n": 43838,
+          "n_positive": 54,
+          "pr_auc": 0.754468,
+          "roc_auc": 0.944383
+        }
+      },
+      "finmind_fraud_ulb_iforest": {
+        "model": "IsolationForest",
+        "metrics": {
+          "precision": 0.016393,
+          "recall": 0.018519,
+          "f1": 0.017391,
+          "n": 43838,
+          "n_positive": 54,
+          "pr_auc": 0.045749,
+          "roc_auc": 0.949019
+        }
+      }
+    }
+  },
+  "forecasting": {
+    "task": "forecasting",
+    "protocol": "same chronological 30-day recursive test for every candidate; GRU compared retail-only-trained vs pooled-trained",
+    "selected_model": "gru",
+    "selection_scores_scaled_test_mae": {
+      "rnn": 0.805266,
+      "lstm": 0.907826,
+      "gru": 0.751233,
+      "ar14": 0.874622,
+      "naive": 1.361155,
+      "ma7": 0.858088
+    },
+    "retail_only_vs_pooled": {
+      "rnn": {
+        "retail_test_recursive_30d_mae": {
+          "retail_only_training": 0.952853,
+          "pooled_training": 0.904704
+        },
+        "superstore_test_recursive_30d_mae": {
+          "retail_only_training": 0.598546,
+          "pooled_training": 0.705829
+        },
+        "epochs_run_retail_only": 48
+      },
+      "lstm": {
+        "retail_test_recursive_30d_mae": {
+          "retail_only_training": 0.798644,
+          "pooled_training": 1.075578
+        },
+        "superstore_test_recursive_30d_mae": {
+          "retail_only_training": 0.639491,
+          "pooled_training": 0.740074
+        },
+        "epochs_run_retail_only": 56
+      },
+      "gru": {
+        "retail_test_recursive_30d_mae": {
+          "retail_only_training": 0.808571,
+          "pooled_training": 0.777445
+        },
+        "superstore_test_recursive_30d_mae": {
+          "retail_only_training": 0.650778,
+          "pooled_training": 0.725021
+        },
+        "epochs_run_retail_only": 45
+      }
+    },
+    "honest_conclusion": "Pooled training improved the Online Retail test (GRU recursive-30d scaled MAE 0.809 -> 0.777) but slightly degraded the Superstore test (0.651 -> 0.725); the net pooled score of the selected GRU (0.751) is within ~0.02 of the retail-only average \u2014 i.e. dataset expansion gave broader coverage with essentially neutral-to-positive net effect, NOT an automatic improvement. Deep models beat the naive baseline but the simple MA(7) baseline is competitive (0.858 vs 0.751)."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "model": "LogisticRegression",
+  "seed": 42,
+  "features": [
+    "chk_acct",
+    "duration_months",
+    "credit_history",
+    "purpose",
+    "credit_amount",
+    "savings_acct",
+    "present_employment",
+    "installment_rate",
+    "personal_status",
+    "other_debtors",
+    "present_residence",
+    "property",
+    "age",
+    "other_installments",
+    "housing",
+    "n_credits",
+    "job",
+    "n_people",
+    "telephone",
+    "foreign_worker"
+  ],
+  "split": "stratified random 0.7/0.15/0.15 (no timestamps in data)",
+  "scaler": "StandardScaler fit on train only",
+  "trained_rows": 699,
+  "trained_at": "2026-10-04T13:44:57.234690+00:00"
+}

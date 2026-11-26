@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+@theme {
+  /* ------------------------------------------------------------------
+     FINMIND design system – premium financial technology
+     Restrained palette: deep ink, warm canvas, indigo accent.
+  ------------------------------------------------------------------ */
+  --color-ink-950: #0A0F1E;
+  --color-ink-900: #101728;
+  --color-ink-800: #1B2438;
+  --color-ink-700: #2A3550;
+  --color-ink-600: #3D4A68;
+  --color-ink-500: #5C6B8A;
+  --color-ink-400: #8794AE;
+  --color-ink-300: #B4BECE;
+  --color-ink-200: #D8DEE8;
+  --color-ink-100: #EBEEF3;
+  --color-ink-50: #F5F7FA;
+
+  --color-canvas: #F6F7F9;
+
+  --color-primary-600: #4F46E5;
+  --color-primary-700: #4338CA;
+  --color-primary-500: #6366F1;
+  --color-primary-400: #818CF8;
+  --color-primary-50: #EEF0FE;
+
+  --color-accent-600: #7C3AED;
+  --color-accent-400: #A78BFA;
+
+  --color-positive-600: #059669;
+  --color-positive-500: #10B981;
+  --color-positive-50: #ECF9F4;
+
+  --color-negative-600: #DC2626;
+  --color-negative-500: #EF4444;
+  --color-negative-50: #FDF0EF;
+
+  --color-caution-600: #D97706;
+  --color-caution-500: #F59E0B;
+  --color-caution-50: #FCF5E8;
+
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 1px 2px rgba(10, 15, 30, 0.04), 0 4px 16px rgba(10, 15, 30, 0.05);
+  --shadow-card-hover: 0 2px 4px rgba(10, 15, 30, 0.05), 0 12px 32px rgba(10, 15, 30, 0.09);
+  --shadow-pop: 0 8px 40px rgba(10, 15, 30, 0.16);
+
+  --radius-card: 16px;
+}
+
+html {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink-950);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-primary-50);
+  color: var(--color-primary-700);
+}
+
+/* Refined scrollbars */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(92, 107, 138, 0.28);
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(92, 107, 138, 0.45);
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ------------------------------------------------------------------
+   Motion
+------------------------------------------------------------------ */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes typing-dot {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.45s cubic-bezier(0.21, 1.02, 0.73, 1) both;
+}
+.animate-fade-in {
+  animation: fade-in 0.4s ease both;
+}
+.stagger-1 { animation-delay: 40ms; }
+.stagger-2 { animation-delay: 90ms; }
+.stagger-3 { animation-delay: 140ms; }
+.stagger-4 { animation-delay: 190ms; }
+.stagger-5 { animation-delay: 240ms; }
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-ink-100) 25%,
+    var(--color-ink-50) 50%,
+    var(--color-ink-100) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+
+.typing-dot {
+  animation: typing-dot 1.2s infinite;
+}
+.typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* ------------------------------------------------------------------
+   Utilities
+------------------------------------------------------------------ */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.brand-gradient {
+  background: linear-gradient(135deg, var(--color-primary-600), var(--color-accent-600));
+}
+
+.hairline {
+  border-color: rgba(16, 23, 40, 0.08);
+}
+
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-canvas), 0 0 0 4px var(--color-primary-500);
+  border-radius: 10px;
+}

@@ -1,0 +1,59 @@
+{
+  "analyzed_at": "2026-10-04T12:08:53.838594+00:00",
+  "column_dtypes": {
+    "Country": "object",
+    "CustomerID": "Float64",
+    "Description": "object",
+    "InvoiceDate": "datetime64[ns]",
+    "InvoiceNo": "object",
+    "Quantity": "int64",
+    "StockCode": "object",
+    "UnitPrice": "float64"
+  },
+  "columns": 8,
+  "daily_series": {
+    "end": "2011-12-09",
+    "n_days": 374,
+    "start": "2010-12-01"
+  },
+  "dataset": "online_retail",
+  "exact_duplicate_rows": 5268,
+  "missing": {
+    "CustomerID": 135080,
+    "Description": 1454
+  },
+  "missing_total_cells": 136534,
+  "outliers_iqr": {
+    "Quantity": {
+      "count": 58619,
+      "iqr_lower": -12.5,
+      "iqr_upper": 23.5
+    },
+    "UnitPrice": {
+      "count": 39627,
+      "iqr_lower": -3.0700000000000003,
+      "iqr_upper": 8.45
+    }
+  },
+  "rows": 541909,
+  "timestamps": {
+    "column": "InvoiceDate",
+    "duplicate_timestamps": 518649,
+    "max": "2011-12-09 12:50:00",
+    "min": "2010-12-01 08:26:00",
+    "sorted_input": true,
+    "unparseable": 0
+  },
+  "transformation_decisions": {
+    "calendar_gap_days_filled_with_zero": 69,
+    "exclusion_rationale": "Revenue series counts completed positive-quantity, positive-price sales only: cancellations (InvoiceNo starting 'C') and returns (negative Quantity) are documented and excluded from REVENUE (they are not cash inflows); rows with UnitPrice<=0 are data artifacts. No row was deleted from the raw dataset on disk.",
+    "missing_customerid_rows_kept": 135080,
+    "rows_cancelled_invoices_excluded": 9288,
+    "rows_kept_for_revenue": 530104,
+    "rows_negative_quantity_excluded": 10624,
+    "rows_negative_unitprice_excluded": 2,
+    "rows_raw": 541909,
+    "rows_zero_unitprice_excluded": 2515,
+    "unparseable_invoice_dates": 0
+  }
+}

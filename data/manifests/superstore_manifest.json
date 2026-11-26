@@ -1,0 +1,28 @@
+{
+  "checksum": {
+    "data/raw/superstore/Sample - Superstore.csv": "58fb59c63089e564d835e4aabe19d371757de1137a5bf1888243ae386c4b7a97"
+  },
+  "columns": 21,
+  "download_date": "2026-10-04",
+  "features": [
+    "date (aggregated)",
+    "sales = sum(Sales) per day"
+  ],
+  "license": "Public sample data for educational use (per Kaggle mirror; original from Tableau community)",
+  "name": "Sample Superstore",
+  "prepared_at": "2026-10-04T12:08:54.180403+00:00",
+  "processed": "data/processed/forecasting/superstore_daily.csv",
+  "quality_report": "data/reports/quality/superstore.json",
+  "rows": 9994,
+  "source": "Tableau 'Sample Superstore' sample data via Kaggle mirror vivek468/superstore-dataset-final",
+  "target": "next-day sales",
+  "task": "daily_sales_forecasting",
+  "transformation_decisions": {
+    "calendar_gap_days_filled_with_zero": 221,
+    "exclusion_rationale": "Daily sales series = sum of Sales by Order Date for sales rows with Sales > 0. Days without orders are real zero-sales days. Nothing was deleted from the raw file; the series is an aggregation.",
+    "rows_nonpositive_sales_excluded": 0,
+    "rows_raw": 9994,
+    "ship_date_before_order_date_rows": 0,
+    "unparseable_order_dates": 0
+  }
+}

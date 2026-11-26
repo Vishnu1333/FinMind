@@ -1,0 +1,75 @@
+{
+  "analyzed_at": "2026-10-04T12:08:54.157519+00:00",
+  "column_dtypes": {
+    "Category": "object",
+    "City": "object",
+    "Country": "object",
+    "Customer ID": "object",
+    "Customer Name": "object",
+    "Discount": "float64",
+    "Order Date": "datetime64[ns]",
+    "Order ID": "object",
+    "Postal Code": "int64",
+    "Product ID": "object",
+    "Product Name": "object",
+    "Profit": "float64",
+    "Quantity": "int64",
+    "Region": "object",
+    "Row ID": "int64",
+    "Sales": "float64",
+    "Segment": "object",
+    "Ship Date": "datetime64[ns]",
+    "Ship Mode": "object",
+    "State": "object",
+    "Sub-Category": "object"
+  },
+  "columns": 21,
+  "daily_series": {
+    "end": "2017-12-30",
+    "n_days": 1458,
+    "start": "2014-01-03"
+  },
+  "dataset": "superstore",
+  "exact_duplicate_rows": 0,
+  "missing": {},
+  "missing_total_cells": 0,
+  "outliers_iqr": {
+    "Discount": {
+      "count": 856,
+      "iqr_lower": -0.30000000000000004,
+      "iqr_upper": 0.5
+    },
+    "Profit": {
+      "count": 1881,
+      "iqr_lower": -39.724125,
+      "iqr_upper": 70.816875
+    },
+    "Quantity": {
+      "count": 170,
+      "iqr_lower": -2.5,
+      "iqr_upper": 9.5
+    },
+    "Sales": {
+      "count": 1167,
+      "iqr_lower": -271.71000000000004,
+      "iqr_upper": 498.93
+    }
+  },
+  "rows": 9994,
+  "timestamps": {
+    "column": "Order Date",
+    "duplicate_timestamps": 8757,
+    "max": "2017-12-30 00:00:00",
+    "min": "2014-01-03 00:00:00",
+    "sorted_input": false,
+    "unparseable": 0
+  },
+  "transformation_decisions": {
+    "calendar_gap_days_filled_with_zero": 221,
+    "exclusion_rationale": "Daily sales series = sum of Sales by Order Date for sales rows with Sales > 0. Days without orders are real zero-sales days. Nothing was deleted from the raw file; the series is an aggregation.",
+    "rows_nonpositive_sales_excluded": 0,
+    "rows_raw": 9994,
+    "ship_date_before_order_date_rows": 0,
+    "unparseable_order_dates": 0
+  }
+}

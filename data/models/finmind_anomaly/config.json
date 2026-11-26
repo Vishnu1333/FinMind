@@ -1,0 +1,16 @@
+{
+  "model": "IsolationForest",
+  "seed": 42,
+  "features": [
+    "log_amount",
+    "hour_sin",
+    "hour_cos",
+    "dow_sin",
+    "dow_cos",
+    "is_weekend"
+  ],
+  "target": "isFraud",
+  "split": "chronological on step (70/15/15)",
+  "trained_rows": 6082007,
+  "trained_at": "2026-10-04T17:00:23.101068+00:00"
+}

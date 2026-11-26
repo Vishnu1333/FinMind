@@ -1,0 +1,115 @@
+{
+  "candidate": "ar14",
+  "pooled_one_step_scaled": {
+    "mae": 0.959924,
+    "rmse": 1.408655,
+    "mape_pct": 204.4356,
+    "mape_excluded_points": 0,
+    "r2": 0.045988,
+    "n": 273
+  },
+  "pooled_recursive_30d_scaled": {
+    "mae": 0.874622,
+    "rmse": 1.056704,
+    "mape_pct": 92.0854,
+    "mape_excluded_points": 0,
+    "r2": 0.047902,
+    "n": 60
+  },
+  "per_series": {
+    "online_retail": {
+      "one_step_scaled": {
+        "mae": 1.272737,
+        "rmse": 1.835335,
+        "mape_pct": 75.0835,
+        "mape_excluded_points": 0,
+        "r2": -0.002228,
+        "n": 55
+      },
+      "recursive_30d_scaled": {
+        "mae": 1.164134,
+        "rmse": 1.315033,
+        "mape_pct": 84.6199,
+        "mape_excluded_points": 0,
+        "r2": -0.172357,
+        "n": 30
+      },
+      "recursive_30d_real": {
+        "mae": 20647.835545,
+        "rmse": 23324.271546,
+        "mape_pct": 46.1104,
+        "mape_excluded_points": 4,
+        "r2": -0.172357,
+        "n": 30
+      }
+    },
+    "superstore": {
+      "one_step_scaled": {
+        "mae": 0.881004,
+        "rmse": 1.27871,
+        "mape_pct": 237.0703,
+        "mape_excluded_points": 0,
+        "r2": -0.052163,
+        "n": 218
+      },
+      "recursive_30d_scaled": {
+        "mae": 0.585109,
+        "rmse": 0.709884,
+        "mape_pct": 99.551,
+        "mape_excluded_points": 0,
+        "r2": -0.002758,
+        "n": 30
+      },
+      "recursive_30d_real": {
+        "mae": 1219.475317,
+        "rmse": 1479.52801,
+        "mape_pct": 328.5857,
+        "mape_excluded_points": 4,
+        "r2": -0.002758,
+        "n": 30
+      }
+    }
+  },
+  "recursive_details": {
+    "online_retail": {
+      "scaled": {
+        "mae": 1.164134,
+        "rmse": 1.315033,
+        "mape_pct": 84.6199,
+        "mape_excluded_points": 0,
+        "r2": -0.172357,
+        "n": 30
+      },
+      "real_units": {
+        "mae": 20647.835545,
+        "rmse": 23324.271546,
+        "mape_pct": 46.1104,
+        "mape_excluded_points": 4,
+        "r2": -0.172357,
+        "n": 30
+      },
+      "days_evaluated": 30,
+      "forecast_start": "2011-10-02"
+    },
+    "superstore": {
+      "scaled": {
+        "mae": 0.585109,
+        "rmse": 0.709884,
+        "mape_pct": 99.551,
+        "mape_excluded_points": 0,
+        "r2": -0.002758,
+        "n": 30
+      },
+      "real_units": {
+        "mae": 1219.475317,
+        "rmse": 1479.52801,
+        "mape_pct": 328.5857,
+        "mape_excluded_points": 4,
+        "r2": -0.002758,
+        "n": 30
+      },
+      "days_evaluated": 30,
+      "forecast_start": "2017-05-13"
+    }
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "generated_at": "2026-10-04T20:41:59.136891+00:00",
+  "policy": "Every transformation is documented per dataset. No row was silently deleted from any raw dataset; exclusions (e.g. invoice cancellations for the revenue series) are counted and justified. Calendar gaps in daily series are filled with real zero-activity days. Outliers are reported, never removed.",
+  "datasets": {
+    "online_retail": {
+      "rows": 541909,
+      "columns": 8,
+      "missing_total_cells": 136534,
+      "missing_by_column": {
+        "CustomerID": 135080,
+        "Description": 1454
+      },
+      "exact_duplicate_rows_raw": 5268,
+      "outliers_iqr_counts": {
+        "Quantity": 58619,
+        "UnitPrice": 39627
+      },
+      "class_balance": null,
+      "transformation_decisions": {
+        "calendar_gap_days_filled_with_zero": 69,
+        "exclusion_rationale": "Revenue series counts completed positive-quantity, positive-price sales only: cancellations (InvoiceNo starting 'C') and returns (negative Quantity) are documented and excluded from REVENUE (they are not cash inflows); rows with UnitPrice<=0 are data artifacts. No row was deleted from the raw dataset on disk.",
+        "missing_customerid_rows_kept": 135080,
+        "rows_cancelled_invoices_excluded": 9288,
+        "rows_kept_for_revenue": 530104,
+        "rows_negative_quantity_excluded": 10624,
+        "rows_negative_unitprice_excluded": 2,
+        "rows_raw": 541909,
+        "rows_zero_unitprice_excluded": 2515,
+        "unparseable_invoice_dates": 0
+      },
+      "license": "CC BY 4.0 (as listed by UCI)",
+      "checksum_sha256_of_raw": {
+        "data/raw/online_retail/online-retail.zip": "f5385cbb54bbebf7196389109c6b0621faab0c304e3702548165e71c84aede8b"
+      }
+    },
+    "superstore": {
+      "rows": 9994,
+      "columns": 21,
+      "missing_total_cells": 0,
+      "missing_by_column": {},
+      "exact_duplicate_rows_raw": 0,
+      "outliers_iqr_counts": {
+        "Discount": 856,
+        "Profit": 1881,
+        "Quantity": 170,
+        "Sales": 1167
+      },
+      "class_balance": null,
+      "transformation_decisions": {
+        "calendar_gap_days_filled_with_zero": 221,
+        "exclusion_rationale": "Daily sales series = sum of Sales by Order Date for sales rows with Sales > 0. Days without orders are real zero-sales days. Nothing was deleted from the raw file; the series is an aggregation.",
+        "rows_nonpositive_sales_excluded": 0,
+        "rows_raw": 9994,
+        "ship_date_before_order_date_rows": 0,
+        "unparseable_order_dates": 0
+      },
+      "license": "Public sample data for educational use (per Kaggle mirror; original from Tableau community)",
+      "checksum_sha256_of_raw": {
+        "data/raw/superstore/Sample - Superstore.csv": "58fb59c63089e564d835e4aabe19d371757de1137a5bf1888243ae386c4b7a97"
+      }
+    },
+    "paysim1": {
+      "rows": 6362620,
+      "columns": 8,
+      "missing_total_cells": 0,
+      "missing_by_column": {},
+      "exact_duplicate_rows_raw": 0,
+      "outliers_iqr_counts": {
+        "amount": 338078,
+        "isFlaggedFraud": 16,
+        "isFraud": 8213,
+        "oldbalanceDest": 786135,
+        "oldbalanceOrg": 1112507,
+        "step": 102688
+      },
+      "class_balance": {
+        "counts": {
+          "0": 6354407,
+          "1": 8213
+        },
+        "positive_rate": 0.001291,
+        "target": "isFraud"
+      },
+      "transformation_decisions": {
+        "chronological_split_rule": "split on `step` (1 step = 1 hour): train < val < test, no shuffle",
+        "duplicate_feature_rows": 1675,
+        "isflaggedfraud_audit": {
+          "all_flagged_are_fraud": true,
+          "decision": "excluded from features: it is an upstream detector's output (target leakage)",
+          "rows_flagged": 16
+        },
+        "post_transaction_balances": "newbalanceOrig/newbalanceDest NOT loaded: dataset authors state frauds are cancelled so these leak the outcome (Phase 15).",
+        "rows_raw": 6362620
+      },
+      "license": "CC BY-SA 4.0 (as listed on the Kaggle dataset page)",
+      "checksum_sha256_of_raw": {
+        "data/raw/ealaxi_paysim1/paysim1.zip": "f7eef9ffad5cfa64a034143a5c9b30491d189420b273d5ad5723ca40b596613d"
+      }
+    },
+    "ulb_creditcard_fraud": {
+      "rows": 284807,
+      "columns": 31,
+      "missing_total_cells": 0,
+      "missing_by_column": {},
+      "exact_duplicate_rows_raw": 1081,
+      "outliers_iqr_counts": {
+        "Amount": 31904,
+        "Class": 492,
+        "V1": 7062,
+        "V10": 9496,
+        "V11": 780,
+        "V12": 15348,
+        "V13": 3368,
+        "V14": 14149,
+        "V15": 2894,
+        "V16": 8184,
+        "V17": 7420,
+        "V18": 7533,
+        "V19": 10205,
+        "V2": 13526,
+        "V20": 27770,
+        "V21": 14497,
+        "V22": 1317,
+        "V23": 18541,
+        "V24": 4774,
+        "V25": 5367,
+        "V26": 5596,
+        "V27": 39163,
+        "V28": 30342,
+        "V3": 3363,
+        "V4": 11148,
+        "V5": 12295,
+        "V6": 22965,
+        "V7": 8948,
+        "V8": 24134,
+        "V9": 8283
+      },
+      "class_balance": {
+        "counts": {
+          "0": 284315,
+          "1": 492
+        },
+        "positive_rate": 0.001727,
+        "target": "Class"
+      },
+      "transformation_decisions": {
+        "chronological_split_rule": "split on Time (seconds since first tx): train < val < test, no shuffle",
+        "duplicate_policy": "duplicates are real repeated transaction records; kept, but the chronological split is audited so identical rows never straddle the train/test boundary",
+        "exact_duplicate_rows_in_raw": 1081,
+        "pca_features_note": "V1..V28 are PCA components provided by the dataset (Worldline/ULB)",
+        "rows_raw": 284807
+      },
+      "license": "DbCL v1.0 (Database Contents License, as listed on the Kaggle dataset page)",
+      "checksum_sha256_of_raw": {
+        "data/raw/mlg-ulb_creditcardfraud/creditcardfraud.zip": "a0360ce715992212e9ac72d8ccdca97f4be87dc1fdf2bed011358f7ab409a28a"
+      }
+    },
+    "uci_credit_default": {
+      "rows": 30000,
+      "columns": 25,
+      "missing_total_cells": 0,
+      "missing_by_column": {},
+      "exact_duplicate_rows_raw": 0,
+      "outliers_iqr_counts": {
+        "AGE": 272,
+        "BILL_AMT1": 2400,
+        "BILL_AMT2": 2395,
+        "BILL_AMT3": 2469,
+        "BILL_AMT4": 2622,
+        "BILL_AMT5": 2725,
+        "BILL_AMT6": 2693,
+        "EDUCATION": 454,
+        "LIMIT_BAL": 167,
+        "PAY_0": 3130,
+        "PAY_2": 4410,
+        "PAY_3": 4209,
+        "PAY_4": 3508,
+        "PAY_5": 2968,
+        "PAY_6": 3079,
+        "PAY_AMT1": 2745,
+        "PAY_AMT2": 2714,
+        "PAY_AMT3": 2598,
+        "PAY_AMT4": 2994,
+        "PAY_AMT5": 2945,
+        "PAY_AMT6": 2958,
+        "default.payment.next.month": 6636
+      },
+      "class_balance": {
+        "counts": {
+          "0": 23364,
+          "1": 6636
+        },
+        "positive_rate": 0.2212,
+        "target": "default.payment.next.month"
+      },
+      "transformation_decisions": {
+        "note": "this dataset is tabular (client snapshot), NOT a time series; the previous attempt to treat BILL_AMT1 rows as a temporal series was invalid (see audit)",
+        "rows_raw": 30000,
+        "split_rule": "no timestamps exist -> stratified random split (documented, valid for this task)"
+      },
+      "license": "CC0 1.0 (as listed on the Kaggle dataset page)",
+      "checksum_sha256_of_raw": {
+        "data/raw/uciml_default-of-credit-card-clients-dataset/default-of-credit-card-clients-dataset.zip": "841af51be5c1e60383a4d8e8ef03b90f619fda362af871455d1c1d326b8e7a2d"
+      }
+    },
+    "german_credit": {
+      "rows": 1000,
+      "columns": 21,
+      "missing_total_cells": 0,
+      "missing_by_column": {},
+      "exact_duplicate_rows_raw": 0,
+      "outliers_iqr_counts": {
+        "age": 23,
+        "credit_amount": 72,
+        "duration_months": 70,
+        "n_credits": 6,
+        "n_people": 155
+      },
+      "class_balance": {
+        "counts": {
+          "0": 700,
+          "1": 300
+        },
+        "positive_rate": 0.3,
+        "target": "target"
+      },
+      "transformation_decisions": {
+        "categorical_encoding": "integer-encoded categories: ['chk_acct', 'credit_history', 'purpose', 'savings_acct', 'present_employment', 'personal_status', 'other_debtors', 'property', 'other_installments', 'housing', 'job', 'telephone', 'foreign_worker']",
+        "rows_raw": 1000,
+        "split_rule": "no timestamps -> stratified random split",
+        "target_mapping": "1 = good credit -> 0, 2 = bad credit -> 1 (bad credit is the positive class)"
+      },
+      "license": "CC BY 4.0 (as listed by UCI)",
+      "checksum_sha256_of_raw": {
+        "data/raw/german_credit/statlog-german-credit-data.zip": "e12d9d5def6845c0622634a1cd2ab87fa470668c4298f1ec52a4e403376a435b"
+      }
+    }
+  }
+}
