@@ -22,8 +22,5 @@ def hash_otp(email: str, purpose: str, code: str) -> str:
 
 
 def verify_otp(email: str, purpose: str, code: str, expected_hash: str) -> bool:
-    try:
-        actual = hash_otp(email, purpose, code)
-    except RuntimeError:
-        return False
+    actual = hash_otp(email, purpose, code)
     return hmac.compare_digest(actual, expected_hash)
