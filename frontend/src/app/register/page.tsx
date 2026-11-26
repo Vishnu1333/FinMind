@@ -100,7 +100,7 @@ export default function RegisterPage() {
             : 'Create your business workspace and verify your email to secure your account.'}
         </p>
 
-        {notice && <div className="mt-6 rounded-xl bg-positive-50 border border-positive-600/15 px-4 py-3 text-[13px] text-positive-700">{notice}</div>}
+        {notice && <div className="mt-6 rounded-xl bg-caution-50 border border-caution-600/15 px-4 py-3 text-[13px] text-caution-600">{notice}</div>}
         {error && <div className="mt-6 rounded-xl bg-negative-50 border border-negative-600/15 px-4 py-3 text-[13px] text-negative-600">{error}</div>}
 
         {!otpSent ? (
