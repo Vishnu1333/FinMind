@@ -136,7 +136,14 @@ def _validate_challenge(db: Session, email: str, purpose: str, code: str):
         challenge.consumed_at = now
         db.commit()
         raise HTTPException(status_code=429, detail="Too many incorrect codes. Request a new code.")
-    if not verify_otp(email.lower(), purpose, code, challenge.otp_hash):
+    try:
+        code_is_valid = verify_otp(email.lower(), purpose, code, challenge.otp_hash)
+    except RuntimeError:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="OTP_HASH_SECRET is missing or too short in the backend environment.",
+        )
+    if not code_is_valid:
         challenge.attempts += 1
         if challenge.attempts >= OTP_MAX_ATTEMPTS:
             challenge.consumed_at = now
