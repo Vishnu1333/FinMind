@@ -13,8 +13,7 @@ class CardResponse(pydantic.BaseModel):
     last_four: str
     status: str
     
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
 
 @router.get("", response_model=List[CardResponse])
 @router.get("/", response_model=List[CardResponse], include_in_schema=False)
