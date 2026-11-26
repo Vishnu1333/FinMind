@@ -81,7 +81,7 @@ export const api = {
   },
 
   get: async <T>(endpoint: string): Promise<T> => {
-    const isPublicAuth = endpoint.startsWith('/auth/register') || endpoint.startsWith('/auth/login');
+    const isPublicAuth = endpoint.startsWith('/auth/register') || endpoint.startsWith('/auth/login') || endpoint.startsWith('/auth/otp/');
     const response = await fetch(`${BASE_URL}${endpoint}`, {
       method: 'GET',
       headers: api.getHeaders(true, isPublicAuth),
