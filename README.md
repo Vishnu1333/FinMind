@@ -104,3 +104,37 @@ This repository contains the FinMind project source. Features that rely on exter
 ## License
 
 No license has been specified yet. Unless a license is added, the repository's contents remain subject to the applicable default copyright rules.
+
+
+## Gmail OTP Authentication
+
+FinMind registration and every login use email OTP verification. The API sends a six-digit code through Gmail SMTP; codes expire after five minutes, are single-use, and allow up to five verification attempts. Resend is throttled and limited per email and purpose.
+
+Configure these variables in the **backend** environment (local `.env` or your backend host's secret settings):
+
+- `SMTP_EMAIL`: dedicated Gmail sender address
+- `SMTP_APP_PASSWORD`: a newly generated Google App Password (remove spaces)
+- `SMTP_HOST`: `smtp.gmail.com` (default)
+- `SMTP_PORT`: `587` (default; STARTTLS)
+- `SMTP_FROM_NAME`: `FinMind Security` (default)
+- `OTP_HASH_SECRET`: random secret of at least 32 characters
+
+Generate a secret locally:
+
+```bash
+python -c "import secrets; print(secrets.token_urlsafe(48))"
+```
+
+Copy the generated value into your backend environment as `OTP_HASH_SECRET`. Do not commit real credentials. The checked-in `.env.example` contains placeholders only. If a Gmail App Password was previously shared or exposed, revoke it and generate a replacement.
+
+The OTP challenge table is created by the backend's SQLAlchemy metadata initialization. Existing deployments should restart the backend after deploying this change so the table is created.
+
+Authentication endpoints:
+
+- `POST /auth/register` — submit registration details and email a registration OTP
+- `POST /auth/register/verify` — verify registration OTP and create the account
+- `POST /auth/login` — validate password and email a login OTP
+- `POST /auth/login/verify` — verify login OTP and issue access/refresh tokens
+- `POST /auth/otp/resend` — resend a code after the cooldown
+
+OTP security tests are in `backend/tests/test_otp_utils.py` and `backend/tests/test_auth_otp.py`.
