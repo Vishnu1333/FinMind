@@ -83,13 +83,20 @@ def _create_and_email_challenge(
         raise HTTPException(status_code=429, detail="Too many verification emails. Please try again later.")
 
     code = generate_otp()
+    try:
+        code_digest = hash_otp(email, purpose, code)
+    except RuntimeError:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="OTP_HASH_SECRET is missing or too short in the backend environment.",
+        )
     challenge = models.OTPChallenge(
         email=email,
         purpose=purpose,
         user_id=user_id,
         business_name=business_name,
         hashed_password=hashed_password,
-        otp_hash=hash_otp(email, purpose, code),
+        otp_hash=code_digest,
         expires_at=now + timedelta(minutes=OTP_TTL_MINUTES),
         attempts=0,
         resend_after=now + timedelta(seconds=OTP_RESEND_SECONDS),
