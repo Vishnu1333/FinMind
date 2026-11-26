@@ -14,7 +14,7 @@ class BusinessResponse(BaseModel):
     created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 @router.get('/business', response_model=BusinessResponse)
 def get_business(current_user: models.User = Depends(get_current_user), db: Session = Depends(database.get_db)):
