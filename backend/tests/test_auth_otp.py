@@ -17,6 +17,8 @@ def test_registration_and_login_require_otp(monkeypatch):
     email = "otp-flow-test@example.com"
     try:
         # Ensure this test can be rerun against the isolated test database.
+        db.query(models.OTPChallenge).filter(models.OTPChallenge.email == email).delete(synchronize_session=False)
+        db.commit()
         existing = db.query(models.User).filter(models.User.email == email).first()
         if existing:
             db.delete(existing)
