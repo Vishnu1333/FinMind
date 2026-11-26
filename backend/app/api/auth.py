@@ -65,6 +65,10 @@ def _create_and_email_challenge(
 ):
     email = email.lower()
     now = datetime.utcnow()
+    # Remove stale challenge records (including pending password hashes) after their useful lifetime.
+    db.query(models.OTPChallenge).filter(
+        models.OTPChallenge.created_at < now - timedelta(days=1)
+    ).delete(synchronize_session=False)
     latest = _latest_challenge(db, email, purpose)
     if latest and latest.resend_after and latest.resend_after > now:
         wait = max(1, int((latest.resend_after - now).total_seconds()))
@@ -202,6 +206,8 @@ def verify_registration(payload: OTPVerify, db: Session = Depends(get_db)):
     user = models.User(email=email, hashed_password=challenge.hashed_password, business_id=business.id)
     db.add(user)
     challenge.consumed_at = datetime.utcnow()
+    challenge.hashed_password = None
+    challenge.business_name = None
     try:
         db.commit()
         db.refresh(user)
