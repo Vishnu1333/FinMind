@@ -94,7 +94,7 @@ export const api = {
     body?: unknown,
     isFormData: boolean = false,
   ): Promise<T> => {
-    const isPublicAuth = endpoint.startsWith('/auth/register') || endpoint.startsWith('/auth/login');
+    const isPublicAuth = endpoint.startsWith('/auth/register') || endpoint.startsWith('/auth/login') || endpoint.startsWith('/auth/otp/');
     const response = await fetch(`${BASE_URL}${endpoint}`, {
       method: 'POST',
       headers: api.getHeaders(!isFormData, isPublicAuth),
