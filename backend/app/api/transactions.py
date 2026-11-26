@@ -21,7 +21,7 @@ class TransactionResponse(BaseModel):
     category_name: Optional[str]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 def _to_response(t: models.Transaction) -> TransactionResponse:
