@@ -154,3 +154,25 @@ class AssistantMessage(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=True)
 
     conversation = relationship("AssistantConversation", back_populates="messages")
+
+
+class OTPChallenge(Base):
+    """Persist short-lived registration/login OTP challenges without storing the code."""
+
+    __tablename__ = "otp_challenges"
+    __table_args__ = (
+        Index("ix_otp_email_purpose_created", "email", "purpose", "created_at"),
+    )
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String(320), nullable=False, index=True)
+    purpose = Column(String(20), nullable=False)  # registration | login
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=True, index=True)
+    business_name = Column(String, nullable=True)
+    hashed_password = Column(String, nullable=True)
+    otp_hash = Column(String(64), nullable=False)
+    expires_at = Column(DateTime, nullable=False)
+    attempts = Column(Integer, nullable=False, default=0)
+    resend_after = Column(DateTime, nullable=False)
+    consumed_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, server_default=func.now(), nullable=False)

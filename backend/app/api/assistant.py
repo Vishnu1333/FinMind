@@ -20,8 +20,7 @@ class StepResult(pydantic.BaseModel):
     text_lines: list = []
     extra: dict = {}
 
-    class Config:
-        orm_mode = True
+    model_config = {"from_attributes": True}
 
 
 class PendingAction(pydantic.BaseModel):

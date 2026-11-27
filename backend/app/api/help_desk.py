@@ -15,8 +15,7 @@ class TicketResponse(pydantic.BaseModel):
     priority: str
     category: str
     
-    class Config:
-        orm_mode = True
+    model_config = {"from_attributes": True}
 
 class CreateTicketRequest(pydantic.BaseModel):
     title: str

@@ -21,7 +21,7 @@ def upgrade() -> None:
     # --------------------------------------------------------------
     # 1️⃣ Install the pgvector extension (PostgreSQL only)
     # --------------------------------------------------------------
-    # op.execute("CREATE EXTENSION IF NOT EXISTS vector;")  # Skipped due to missing extension
+    op.execute("CREATE EXTENSION IF NOT EXISTS vector")
 
     # --------------------------------------------------------------
     # 2️⃣ documents table – business‑level ownership and audit fields

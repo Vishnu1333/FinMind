@@ -16,8 +16,7 @@ class DocumentResponse(pydantic.BaseModel):
     status: str
     document_type: str
 
-    class Config:
-        orm_mode = True
+    model_config = {"from_attributes": True}
 
 
 @router.post("/upload", response_model=DocumentResponse)

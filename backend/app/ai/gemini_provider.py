@@ -51,16 +51,44 @@ class GeminiProvider(AIProvider):
         model: Optional[str] = None,
         timeout: Optional[float] = None,
     ) -> None:
-        self.api_key = api_key or os.getenv("GEMINI_API_KEY")
-        if not self.api_key:
-            raise AIConfigurationError("GEMINI_API_KEY is not configured in environment.")
+        self.gateway_base_url = os.getenv("NEON_AI_GATEWAY_BASE_URL", "").rstrip("/")
+        self.gateway_token = os.getenv("NEON_AI_GATEWAY_TOKEN", "").strip()
+        self.use_neon_gateway = bool(self.gateway_base_url and self.gateway_token)
 
-        self.model = model or os.getenv("GEMINI_MODEL", self.DEFAULT_MODEL)
+        self.api_key = api_key or os.getenv("GEMINI_API_KEY") or (
+            self.gateway_token if self.use_neon_gateway else None
+        )
+        if not self.api_key:
+            raise AIConfigurationError(
+                "GEMINI_API_KEY is not configured; configure it or both NEON_AI_GATEWAY_BASE_URL and NEON_AI_GATEWAY_TOKEN."
+            )
+
+        gateway_model = os.getenv("NEON_AI_GATEWAY_MODEL", "gemini-3-flash")
+        default_model = gateway_model if self.use_neon_gateway else self.DEFAULT_MODEL
+        self.model = model or os.getenv("GEMINI_MODEL", default_model)
         self.timeout = timeout or float(os.getenv("GEMINI_TIMEOUT", str(self.DEFAULT_MODEL and self.DEFAULT_TIMEOUT_SECONDS)))
 
     @property
     def name(self) -> str:
         return "gemini"
+
+    def _request_target(self, model: str) -> tuple[str, Dict[str, str]]:
+        """Return the native Gemini endpoint and auth headers for the selected provider."""
+        if self.use_neon_gateway:
+            return (
+                f"{self.gateway_base_url}/gemini/v1beta/models/{model}:generateContent",
+                {
+                    "Content-Type": "application/json",
+                    "Authorization": f"Bearer {self.gateway_token}",
+                },
+            )
+        return (
+            f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+            {
+                "Content-Type": "application/json",
+                "x-goog-api-key": self.api_key,
+            },
+        )
 
     def _call_via_sdk(
         self,
@@ -127,7 +155,7 @@ class GeminiProvider(AIProvider):
         max_tokens: Optional[int] = None,
     ) -> ProviderResponse:
         """Execute request using direct REST API (compatible when google-generativeai is absent)."""
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={self.api_key}"
+        url, headers = self._request_target(self.model)
 
         contents = [{"parts": [{"text": prompt}]}]
         body: Dict[str, Any] = {"contents": contents}
@@ -147,7 +175,7 @@ class GeminiProvider(AIProvider):
         req = urllib.request.Request(
             url,
             data=req_data,
-            headers={"Content-Type": "application/json"},
+            headers=headers,
             method="POST",
         )
 
@@ -205,7 +233,7 @@ class GeminiProvider(AIProvider):
             except ImportError:
                 genai = None
 
-        if genai is not None:
+        if genai is not None and not self.use_neon_gateway:
             return self._call_via_sdk(
                 genai=genai,
                 prompt=prompt,
@@ -261,10 +289,11 @@ class GeminiProvider(AIProvider):
             generation_config["thinkingConfig"] = {"thinkingBudget": 0}
         body["generationConfig"] = generation_config
 
+        url, headers = self._request_target(model)
         req = urllib.request.Request(
-            f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+            url,
             data=json.dumps(body).encode("utf-8"),
-            headers={"Content-Type": "application/json", "x-goog-api-key": self.api_key},
+            headers=headers,
             method="POST",
         )
         try:
@@ -322,7 +351,8 @@ class GeminiProvider(AIProvider):
         from ..config import GEMINI_FALLBACK_MODELS
 
         chain: list = [self.model]
-        chain += [m for m in GEMINI_FALLBACK_MODELS if m != self.model]
+        if not self.use_neon_gateway:
+            chain += [m for m in GEMINI_FALLBACK_MODELS if m != self.model]
 
         last_error: Optional[Exception] = None
         for model in chain:

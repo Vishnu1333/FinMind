@@ -20,8 +20,7 @@ class AccountBalance(BaseModel):
     name: str
     balance: Decimal
 
-    class Config:
-        orm_mode = True
+    model_config = {"from_attributes": True}
 
 class SummaryResponse(BaseModel):
     currency: str = CURRENCY
